@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Computer Fundamentals के लिए self-created CCC practice questions।">
+    <title>ZeroKB | Computer Fundamentals Practice</title>
+    <style>
+        :root {
+            --ink: #172a3a;
+            --muted: #5c6d79;
+            --paper: #f5f1e8;
+            --white: #fffdf8;
+            --teal: #087f8c;
+            --teal-dark: #075e68;
+            --yellow: #f2c14e;
+            --coral: #e87861;
+            --line: #d9d6cc;
+            --success: #247a58;
+            --error: #b84c3d;
+            --shadow: 0 18px 45px rgba(23, 42, 58, 0.12);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: Georgia, "Noto Serif Devanagari", serif;
+            line-height: 1.6;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1180px;
+            margin: auto;
+            padding: 22px 28px;
+        }
+        .brand {
+            color: var(--ink);
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: .04em;
+            text-decoration: none;
+        }
+        .brand span { color: var(--teal); }
+        .back-link {
+            color: var(--muted);
+            font-family: Arial, sans-serif;
+            font-size: .9rem;
+            text-decoration: none;
+        }
+        .back-link:hover { color: var(--teal); }
+
+        .intro {
+            max-width: 1180px;
+            margin: 18px auto 0;
+            padding: 52px 8%;
+            background: var(--teal);
+            color: var(--white);
+            box-shadow: var(--shadow);
+        }
+        .eyebrow {
+            margin: 0 0 12px;
+            color: var(--yellow);
+            font-family: Arial, sans-serif;
+            font-size: .76rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+        }
+        h1 {
+            max-width: 760px;
+            margin: 0;
+            font-size: clamp(2.2rem, 5vw, 4.2rem);
+            line-height: 1.08;
+            letter-spacing: -.035em;
+        }
+        .intro p {
+            max-width: 650px;
+            margin: 20px 0 0;
+            color: #d7f0ed;
+            font-size: 1.08rem;
+        }
+
+        main { max-width: 900px; margin: auto; padding: 64px 28px 72px; }
+        .practice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 18px;
+        }
+        .question-number {
+            color: var(--teal-dark);
+            font-family: Arial, sans-serif;
+            font-size: .86rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+        .score {
+            padding: 8px 13px;
+            border: 1px solid var(--line);
+            background: var(--white);
+            color: var(--teal-dark);
+            font-family: Arial, sans-serif;
+            font-size: .86rem;
+            font-weight: 700;
+        }
+        .question-card {
+            padding: clamp(24px, 5vw, 42px);
+            border: 1px solid var(--line);
+            border-top: 5px solid var(--yellow);
+            background: var(--white);
+            box-shadow: 0 10px 25px rgba(23, 42, 58, 0.06);
+        }
+        h2 { margin: 0 0 28px; font-size: clamp(1.35rem, 3vw, 1.8rem); line-height: 1.35; white-space: pre-line; }
+        .options { display: grid; gap: 11px; }
+        .option {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 15px;
+            border: 1px solid var(--line);
+            background: #fffefa;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .option:hover { border-color: var(--teal); }
+        .option input { width: 17px; height: 17px; margin: 3px 0 0; accent-color: var(--teal); }
+        .option:has(input:checked) { border-color: var(--teal); background: #edf7f5; }
+        .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+        button {
+            padding: 12px 19px;
+            border: 1px solid var(--teal);
+            background: var(--teal);
+            color: var(--white);
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: .88rem;
+            font-weight: 700;
+        }
+        button:hover { background: var(--teal-dark); }
+        button.secondary { background: transparent; color: var(--teal-dark); }
+        button.secondary:hover { background: var(--teal); color: var(--white); }
+        button:disabled { cursor: default; opacity: .55; }
+        button.secondary:disabled { background: transparent; color: var(--teal-dark); }
+        .feedback {
+            margin-top: 22px;
+            padding: 16px 18px;
+            border-left: 4px solid var(--teal);
+            background: #edf7f5;
+        }
+        .feedback.correct { border-left-color: var(--success); background: #edf7f1; }
+        .feedback.incorrect { border-left-color: var(--error); background: #fff1ee; }
+        .feedback strong { display: block; margin-bottom: 4px; font-family: Arial, sans-serif; }
+        .feedback p { margin: 0; color: var(--muted); }
+        .feedback.correct strong { color: var(--success); }
+        .feedback.incorrect strong { color: var(--error); }
+        .notice { margin: 22px 0 0; color: var(--muted); font-size: .86rem; }
+        .result-card h2 { margin-bottom: 18px; }
+        .result-score { margin: 8px 0 24px; color: var(--teal-dark); font-family: Arial, sans-serif; font-size: 2.4rem; font-weight: 700; }
+        .result-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .result-stats div { padding: 14px; border: 1px solid var(--line); background: #fffefa; }
+        .result-stats strong, .result-stats span { display: block; }
+        .result-stats strong { color: var(--teal-dark); font-family: Arial, sans-serif; font-size: 1.25rem; }
+        .result-stats span { color: var(--muted); font-size: .88rem; }
+        .review-item { margin-top: 14px; padding: 18px; border: 1px solid var(--line); background: #fffefa; }
+        .review-item h3 { margin: 0 0 10px; font-size: 1.05rem; white-space: pre-line; }
+        .review-item p { margin: 6px 0; color: var(--muted); }
+
+        footer {
+            padding: 24px 28px;
+            background: var(--ink);
+            color: #c3d0d1;
+            font-family: Arial, sans-serif;
+            font-size: .85rem;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .topbar { padding: 18px 20px; }
+            .back-link { font-size: .78rem; }
+            .intro { margin-top: 0; padding: 52px 24px; }
+            main { padding: 48px 20px 60px; }
+            .practice-header { align-items: flex-start; flex-direction: column; gap: 10px; }
+            .question-card { padding: 24px 18px; }
+            .actions button { width: 100%; }
+            .result-stats { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+    <link rel="stylesheet" href="zerokb.css">
+    <link rel="stylesheet" href="zerokb-user.css">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="ccc.html">ZeroKB</a>
+        <a class="back-link" href="ccc.html">← सभी विषय</a>
+    </header>
+
+    <section class="intro">
+        <p class="eyebrow">CCC foundation course</p>
+        <h1>Computer Fundamentals Practice</h1>
+        <p>कंप्यूटर की बुनियादी अवधारणाओं पर अपने ज्ञान को परखें। ये प्रश्न इस वेबसाइट के लिए स्वयं बनाए गए अभ्यास प्रश्न हैं, आधिकारिक PYQs नहीं।</p>
+    </section>
+
+    <main>
+        <div class="practice-header">
+            <span class="question-number" id="question-number">प्रश्न 1 / 50</span>
+            <span class="score" id="attempt-count">Attempted: 0 / 50</span>
+        </div>
+
+        <section class="question-card" aria-live="polite">
+            <h2 id="question-text"></h2>
+            <div class="options" id="options"></div>
+            <div class="actions">
+                <button class="secondary" id="previous-button" type="button">पिछला प्रश्न</button>
+                <button id="next-button" type="button">Next</button>
+                <button id="submit-button" type="button" hidden>Submit Quiz</button>
+                <button class="secondary" id="finish-button" type="button">End Quiz / Quiz समाप्त करें</button>
+            </div>
+        </section>
+        <section class="question-card result-card" id="result-panel" aria-live="polite" hidden></section>
+        <p class="notice">अभ्यास प्रश्न केवल सीखने के लिए हैं।</p>
+    </main>
+
+    <footer>© 2026 ZeroKB · Learn • Practice • Master</footer>
+
+    <script src="practice-review.js"></script>
+    <script src="zerokb-practice-features.js"></script>
+    <script>
+        const questions = [
+            { question: "Which component is called the brain of a computer?\nकंप्यूटर का मस्तिष्क किस घटक को कहा जाता है?", options: ["Monitor / मॉनिटर", "CPU / सीपीयू", "Keyboard / कीबोर्ड", "Printer / प्रिंटर"], answer: 1, explanation: "CPU निर्देशों को process करता है और कंप्यूटर के कार्यों को नियंत्रित करता है।" },
+            { question: "Which memory loses its contents when power is off?\nबिजली बंद होने पर किस memory का डेटा मिट जाता है?", options: ["ROM / रोम", "RAM / रैम", "Hard disk / हार्ड डिस्क", "DVD / डीवीडी"], answer: 1, explanation: "RAM अस्थायी memory है; बिजली बंद होने पर इसका डेटा सामान्यतः मिट जाता है।" },
+            { question: "Which device is mainly used to enter text?\nText दर्ज करने के लिए मुख्यतः किस device का उपयोग होता है?", options: ["Speaker / स्पीकर", "Keyboard / कीबोर्ड", "Monitor / मॉनिटर", "Projector / प्रोजेक्टर"], answer: 1, explanation: "Keyboard से अक्षर, संख्याएँ और commands input किए जाते हैं।" },
+            { question: "Which of these is an output device?\nइनमें से कौन-सा output device है?", options: ["Mouse / माउस", "Scanner / स्कैनर", "Monitor / मॉनिटर", "Microphone / माइक्रोफोन"], answer: 2, explanation: "Monitor जानकारी को स्क्रीन पर दिखाता है, इसलिए यह output device है।" },
+            { question: "How many bits are in one byte?\nएक byte में कितने bits होते हैं?", options: ["4", "8", "16", "32"], answer: 1, explanation: "एक byte में 8 bits होते हैं; bit डिजिटल डेटा की सबसे छोटी इकाई है।" },
+            { question: "Which memory keeps its contents without power?\nकौन-सी memory बिजली बंद होने पर भी डेटा बनाए रखती है?", options: ["RAM / रैम", "Cache / कैश", "ROM / रोम", "Register / रजिस्टर"], answer: 2, explanation: "ROM non-volatile memory है और बिजली बंद होने पर भी इसका डेटा बना रहता है।" },
+            { question: "Which device converts a paper document into a digital image?\nकौन-सा device कागज़ी दस्तावेज़ को digital image में बदलता है?", options: ["Printer / प्रिंटर", "Scanner / स्कैनर", "Speaker / स्पीकर", "Plotter / प्लॉटर"], answer: 1, explanation: "Scanner कागज़ पर मौजूद text या चित्र को digital रूप में कंप्यूटर तक पहुँचाता है।" },
+            { question: "What is a main role of an operating system?\nOperating System का मुख्य कार्य क्या है?", options: ["Manage hardware and software / हार्डवेयर व सॉफ्टवेयर संभालना", "Print every file / हर file छापना", "Create electricity / बिजली बनाना", "Clean the monitor / मॉनिटर साफ करना"], answer: 0, explanation: "Operating System memory, files, devices और applications को manage करता है।" },
+            { question: "Which of these is system software?\nइनमें से कौन-सा system software है?", options: ["Photo / फोटो", "Operating system / ऑपरेटिंग सिस्टम", "Text document / text document", "Presentation slide / presentation slide"], answer: 1, explanation: "Operating System hardware और application software के बीच काम करने वाला system software है।" },
+            { question: "Which storage device uses flash memory and has no moving parts?\nकौन-सा storage device flash memory उपयोग करता है और इसमें moving parts नहीं होते?", options: ["SSD / एसएसडी", "Floppy disk / फ्लॉपी डिस्क", "Magnetic tape / मैग्नेटिक टेप", "CD-ROM / सीडी-रोम"], answer: 0, explanation: "SSD flash memory पर डेटा रखती है और इसमें घूमती platter नहीं होती।" },
+            { question: "What does the ALU mainly do?\nALU मुख्यतः क्या करता है?", options: ["Arithmetic and logic / अंकगणित व तर्क", "Print documents / दस्तावेज़ छापना", "Record sound / ध्वनि रिकॉर्ड करना", "Connect cables / केबल जोड़ना"], answer: 0, explanation: "ALU गणना और logical comparisons जैसी क्रियाएँ करता है।" },
+            { question: "Which unit measures processor clock frequency?\nProcessor की clock frequency किस इकाई में मापी जाती है?", options: ["Litre / लीटर", "Hertz / हर्ट्ज़", "Metre / मीटर", "Pixel / पिक्सेल"], answer: 1, explanation: "Processor clock frequency Hertz में मापी जाती है; GHz इसका बड़ा गुणक है।" },
+            { question: "Which device points, clicks, and selects items on screen?\nScreen पर point, click और items चुनने के लिए कौन-सा device है?", options: ["Mouse / माउस", "Printer / प्रिंटर", "Webcam / वेबकैम", "UPS / यूपीएस"], answer: 0, explanation: "Mouse pointer को नियंत्रित करके स्क्रीन पर items चुनने में मदद करता है।" },
+            { question: "What does a printer produce?\nPrinter क्या तैयार करता है?", options: ["Hard copy / कागज़ी प्रति", "Scanned image / scanned image", "Temporary memory / अस्थायी memory", "Network connection / network connection"], answer: 0, explanation: "Printer डिजिटल दस्तावेज़ या चित्र को कागज़ पर छापता है।" },
+            { question: "Which number system uses only 0 and 1?\nकौन-सी संख्या पद्धति केवल 0 और 1 उपयोग करती है?", options: ["Decimal / दशमलव", "Binary / द्विआधारी", "Octal / अष्टाधारी", "Roman / रोमन"], answer: 1, explanation: "Binary number system में केवल 0 और 1 digits होते हैं।" },
+            { question: "What does the .txt extension usually indicate?\n.txt extension सामान्यतः किस प्रकार की file बताती है?", options: ["Plain text / साधारण text", "Audio / audio", "Video / video", "Executable program / executable program"], answer: 0, explanation: ".txt extension सामान्यतः plain text वाली file के लिए होती है।" },
+            { question: "Which shortcut commonly copies selected content?\nचुने हुए content को copy करने का सामान्य shortcut कौन-सा है?", options: ["Ctrl + X", "Ctrl + C", "Ctrl + V", "Ctrl + Z"], answer: 1, explanation: "Ctrl + C कई applications में selected content को copy करता है।" },
+            { question: "Which shortcut commonly pastes copied content?\nCopied content paste करने का सामान्य shortcut कौन-सा है?", options: ["Ctrl + P", "Ctrl + A", "Ctrl + V", "Ctrl + S"], answer: 2, explanation: "Ctrl + V clipboard के content को वर्तमान स्थान पर paste करता है।" },
+            { question: "What is a computer folder mainly used for?\nComputer folder का मुख्य उपयोग क्या है?", options: ["Organize files / files व्यवस्थित करना", "Change screen brightness / screen की चमक बदलना", "Run the fan / पंखा चलाना", "Translate files / files का अनुवाद करना"], answer: 0, explanation: "Folders संबंधित files को समूहित करके व्यवस्थित रखते हैं।" },
+            { question: "Which of these is a web browser?\nइनमें से कौन-सा web browser है?", options: ["Mozilla Firefox / मोज़िला फ़ायरफ़ॉक्स", "Microsoft Excel / माइक्रोसॉफ्ट एक्सेल", "Notepad / नोटपैड", "Calculator / कैलकुलेटर"], answer: 0, explanation: "Web browser वेबसाइटों और web pages को खोलने व देखने के लिए उपयोग होता है।" },
+            { question: "What does a URL identify?\nURL किसकी पहचान करता है?", options: ["A web resource address / web resource का पता", "Battery level / बैटरी स्तर", "Printer cartridge / printer cartridge", "Keyboard key / keyboard key"], answer: 0, explanation: "URL वेब पर किसी page या resource का address बताता है।" },
+            { question: "Which service maps domain names to IP addresses?\nकौन-सी सेवा domain names को IP addresses से जोड़ती है?", options: ["DNS / डीएनएस", "USB / यूएसबी", "HTML / एचटीएमएल", "PDF / पीडीएफ"], answer: 0, explanation: "DNS domain names के अनुरूप IP addresses खोजने में मदद करता है।" },
+            { question: "What is an email attachment?\nEmail attachment क्या होता है?", options: ["A file sent with an email / email के साथ भेजी file", "Sender's password / भेजने वाले का password", "Internet cable / internet cable", "Browser tab / browser tab"], answer: 0, explanation: "Attachment email के साथ भेजा गया document, image या अन्य file होता है।" },
+            { question: "What is phishing?\nPhishing क्या है?", options: ["A scam to steal sensitive information / जानकारी चुराने की धोखाधड़ी", "A file compression method / file compression विधि", "A monitor type / monitor का प्रकार", "A printing method / छापने की विधि"], answer: 0, explanation: "Phishing में नकली message या website से password अथवा वित्तीय जानकारी लेने की कोशिश होती है।" },
+            { question: "Which password practice is safer?\nPassword के लिए कौन-सी आदत अधिक सुरक्षित है?", options: ["Reuse one short password / एक छोटा password दोहराना", "Use long, unique passwords / लंबे और अलग-अलग passwords रखना", "Share passwords publicly / password सार्वजनिक करना", "Put it in a public profile / public profile में लिखना"], answer: 1, explanation: "हर account के लिए लंबा और अलग password रखने से जोखिम कम होता है।" },
+            { question: "What is antivirus software designed to do?\nAntivirus software किस काम के लिए बनाया जाता है?", options: ["Detect and help remove malware / malware पहचानने व हटाने में मदद", "Enlarge the monitor / monitor बड़ा करना", "Create internet service / internet सेवा बनाना", "Replace the keyboard / keyboard बदलना"], answer: 0, explanation: "Antivirus संभावित malware को पहचानने, रोकने और हटाने में मदद करता है।" },
+            { question: "What can connected devices do through a computer network?\nComputer network से जुड़े devices क्या कर सकते हैं?", options: ["Exchange data and share resources / डेटा व संसाधन साझा करना", "Work without power / बिना बिजली काम करना", "Become physically identical / आकार में एक जैसे होना", "Avoid all software / सभी software से बचना"], answer: 0, explanation: "Network devices के बीच communication और files या printers साझा करना संभव करता है।" },
+            { question: "Which device forwards data between networks?\nकौन-सा device networks के बीच data भेजता है?", options: ["Router / राउटर", "Webcam / वेबकैम", "Joystick / जॉयस्टिक", "Plotter / प्लॉटर"], answer: 0, explanation: "Router network traffic को उचित दिशा में भेजता और networks को जोड़ता है।" },
+            { question: "What does Wi-Fi provide?\nWi-Fi क्या सुविधा देता है?", options: ["Wireless network connectivity / wireless network से जुड़ाव", "Paper scanning / कागज़ scan करना", "Permanent power backup / स्थायी power backup", "Disc storage / disc storage"], answer: 0, explanation: "Wi-Fi radio signals से devices को wireless network से जोड़ता है।" },
+            { question: "What is cloud storage?\nCloud storage क्या है?", options: ["Data on remote internet-accessible servers / internet से उपलब्ध servers पर डेटा", "Data only in CPU registers / केवल CPU registers में डेटा", "Printing files / files छापना", "A keyboard setting / keyboard setting"], answer: 0, explanation: "Cloud storage में डेटा remote servers पर रखा जाता है और network से access होता है।" },
+            { question: "Why do users create a backup?\nUsers backup क्यों बनाते हैं?", options: ["Keep a recoverable data copy / डेटा की वापस पाई जा सकने वाली copy रखना", "Enlarge the screen / screen बड़ी करना", "Remove the OS / OS हटाना", "Slow file access / file access धीमा करना"], answer: 0, explanation: "Backup मूल डेटा खोने या खराब होने पर उसे वापस पाने में मदद करता है।" },
+            { question: "What is a database used for?\nDatabase का उपयोग किसलिए होता है?", options: ["Organize and retrieve related data / संबंधित डेटा व्यवस्थित व प्राप्त करना", "Display only video / केवल video दिखाना", "Cool the processor / processor ठंडा करना", "Charge a mouse / mouse charge करना"], answer: 0, explanation: "Database संबंधित जानकारी को व्यवस्थित रूप से संग्रहित और खोजने योग्य बनाता है।" },
+            { question: "In a spreadsheet, what is the intersection of a row and column called?\nSpreadsheet में row और column के मिलने के स्थान को क्या कहते हैं?", options: ["Cell / सेल", "Slide / स्लाइड", "Folder / फोल्डर", "Pixel / पिक्सेल"], answer: 0, explanation: "Spreadsheet में cell एक row और एक column के intersection पर होती है।" },
+            { question: "Which symbol usually begins a spreadsheet formula?\nSpreadsheet formula सामान्यतः किस चिह्न से शुरू होता है?", options: ["=", "#", "@", "&"], answer: 0, explanation: "अधिकांश spreadsheet applications में formula बराबर (=) के चिह्न से शुरू होता है।" },
+            { question: "Which software is suited to creating slide presentations?\nSlide presentation बनाने के लिए कौन-सा software उपयुक्त है?", options: ["Presentation software / presentation software", "Disk cleaner / disk cleaner", "File archiver / file archiver", "Device driver / device driver"], answer: 0, explanation: "Presentation software में slides पर text, images और अन्य सामग्री व्यवस्थित होती है।" },
+            { question: "What is a word processor mainly used for?\nWord processor का मुख्य उपयोग क्या है?", options: ["Create and edit text documents / text documents बनाना व संपादित करना", "Route network packets / network packets भेजना", "Measure temperature / तापमान मापना", "Scan fingerprints / fingerprints scan करना"], answer: 0, explanation: "Word processor letters, reports और दूसरे text documents बनाने व format करने के लिए है।" },
+            { question: "What is the Recycle Bin or Trash mainly for?\nRecycle Bin या Trash का मुख्य उपयोग क्या है?", options: ["Temporarily keep deleted items for recovery / हटाई files को अस्थायी रूप से रखना", "Store the OS permanently / OS स्थायी रूप से रखना", "Increase RAM / RAM बढ़ाना", "Connect to Wi-Fi / Wi-Fi जोड़ना"], answer: 0, explanation: "यह हटाई गई files को अस्थायी रूप से रख सकता है ताकि उन्हें restore किया जा सके।" },
+            { question: "Which port commonly connects a keyboard, mouse, or flash drive?\nKeyboard, mouse या flash drive जोड़ने के लिए कौन-सा port सामान्य है?", options: ["USB port / यूएसबी पोर्ट", "Speaker cone / speaker cone", "Paper tray / paper tray", "Ethernet address / Ethernet address"], answer: 0, explanation: "USB port अनेक peripherals और storage devices जोड़ने के लिए उपयोग होता है।" },
+            { question: "What does a UPS provide during a power failure?\nबिजली जाने पर UPS क्या देता है?", options: ["Temporary backup power / थोड़े समय का backup power", "Faster internet by itself / अपने आप तेज internet", "More disk capacity / अधिक disk क्षमता", "A printed copy / छपी प्रति"], answer: 0, explanation: "UPS सीमित समय की बिजली देता है ताकि काम save करके system बंद किया जा सके।" },
+            { question: "Which storage keeps data for long-term use without power?\nकौन-सा storage बिजली के बिना भी लंबे समय तक डेटा रखता है?", options: ["Secondary storage / द्वितीयक storage", "CPU cache / CPU cache", "RAM / रैम", "CPU register / CPU register"], answer: 0, explanation: "Hard disk और SSD जैसे secondary storage devices non-volatile डेटा रखते हैं।" },
+            { question: "What is the smallest unit of digital information?\nDigital जानकारी की सबसे छोटी इकाई क्या है?", options: ["Bit / बिट", "Byte / बाइट", "Kilobyte / किलोबाइट", "Megabyte / मेगाबाइट"], answer: 0, explanation: "Bit binary digit 0 या 1 को दर्शाता है और सबसे छोटी digital इकाई है।" },
+            { question: "Which unit is larger than a kilobyte in the usual sequence?\nसामान्य क्रम में kilobyte से बड़ी इकाई कौन-सी है?", options: ["Byte / बाइट", "Megabyte / मेगाबाइट", "Bit / बिट", "Nibble / निबल"], answer: 1, explanation: "सामान्य क्रम है: Byte, Kilobyte, Megabyte, Gigabyte और Terabyte।" },
+            { question: "Which is an example of application software?\nApplication software का उदाहरण कौन-सा है?", options: ["Spreadsheet application / spreadsheet application", "Bootloader / bootloader", "Operating system kernel / OS kernel", "Device firmware / device firmware"], answer: 0, explanation: "Spreadsheet application उपयोगकर्ता के काम जैसे गणना और data analysis के लिए होता है।" },
+            { question: "What does a device driver do?\nDevice driver क्या करता है?", options: ["Helps the OS communicate with hardware / OS को hardware से संवाद कराता है", "Creates a chart / chart बनाता है", "Encrypts every website / हर website encrypt करता है", "Cleans printed paper / कागज़ साफ करता है"], answer: 0, explanation: "Driver operating system और hardware device के बीच संचार उपलब्ध कराता है।" },
+            { question: "What is booting?\nBooting क्या है?", options: ["Starting a computer and loading its OS / कंप्यूटर शुरू करके OS load करना", "Deleting every file / हर file मिटाना", "Printing a document / document छापना", "Changing a cable / cable बदलना"], answer: 0, explanation: "Booting में computer शुरू होकर operating system को memory में load करता है।" },
+            { question: "Which key commonly deletes the character left of the cursor?\nCursor के बाईं ओर का character हटाने के लिए कौन-सी key है?", options: ["Backspace / बैकस्पेस", "Shift / शिफ्ट", "Caps Lock / कैप्स लॉक", "Tab / टैब"], answer: 0, explanation: "Backspace सामान्यतः cursor के बाईं ओर का character हटाता है।" },
+            { question: "What does GUI stand for?\nGUI का पूरा नाम क्या है?", options: ["Graphical User Interface / ग्राफिकल यूज़र इंटरफेस", "General Utility Internet / जनरल यूटिलिटी इंटरनेट", "Global User Input / ग्लोबल यूज़र इनपुट", "Graphic Unit Instruction / ग्राफिक यूनिट इंस्ट्रक्शन"], answer: 0, explanation: "GUI में windows, icons और menus जैसे visual elements से system उपयोग किया जाता है।" },
+            { question: "What area does a LAN usually cover?\nLAN सामान्यतः किस क्षेत्र को cover करता है?", options: ["A limited local area / सीमित स्थानीय क्षेत्र", "The whole planet only / केवल पूरा ग्रह", "One CPU register / एक CPU register", "A printed diagram / छपा diagram"], answer: 0, explanation: "LAN घर, कार्यालय या स्कूल जैसे सीमित क्षेत्र के devices को जोड़ता है।" },
+            { question: "What is malware?\nMalware क्या है?", options: ["Software intended to harm or misuse systems / system को नुकसान पहुँचाने वाला software", "A spreadsheet type / spreadsheet का प्रकार", "A display standard / display standard", "A safe backup / सुरक्षित backup"], answer: 0, explanation: "Malware हानिकारक software का व्यापक नाम है; virus और ransomware इसके उदाहरण हैं।" },
+            { question: "What is the purpose of encryption?\nEncryption का उद्देश्य क्या है?", options: ["Make data unreadable without the key / key के बिना डेटा अपठनीय करना", "Enlarge a monitor / monitor बड़ा करना", "Print in color / रंगीन print करना", "Remove file names / file names हटाना"], answer: 0, explanation: "Encryption डेटा को coded रूप देता है ताकि उचित key के बिना उसे पढ़ना कठिन हो।" }
+        ];
+
+        const answerPositions = [3, 1, 0, 2, 3, 2, 1, 2, 1, 0, 2, 0, 2, 1, 0, 3, 1, 0, 3, 3, 1, 0, 2, 3, 3, 1, 0, 2, 1, 0, 1, 2, 3, 2, 3, 2, 1, 3, 0, 3, 0, 2, 1, 1, 3, 2, 0, 0, 1, 0];
+        const difficulties = Array.from({ length: 50 }, function (_, index) {
+            return index < 10 ? "Easy" : index < 35 ? "Moderate" : "Hard";
+        });
+        questions.forEach(function (item, index) {
+            const targetAnswer = answerPositions[index];
+            const correctOption = item.options[item.answer];
+            item.options[item.answer] = item.options[targetAnswer];
+            item.options[targetAnswer] = correctOption;
+            item.answer = targetAnswer;
+            item.difficulty = difficulties[index];
+        });
+
+        let currentQuestion = 0;
+        let readyToSubmit = false;
+        const answers = questions.map(function () { return null; });
+
+        const questionNumber = document.getElementById("question-number");
+        const attemptCount = document.getElementById("attempt-count");
+        const questionText = document.getElementById("question-text");
+        const options = document.getElementById("options");
+        const questionCard = document.querySelector(".question-card");
+        const practiceHeader = document.querySelector(".practice-header");
+        const previousButton = document.getElementById("previous-button");
+        const nextButton = document.getElementById("next-button");
+        const submitButton = document.getElementById("submit-button");
+        const finishButton = document.getElementById("finish-button");
+        const resultPanel = document.getElementById("result-panel");
+
+        function renderQuestion() {
+            const item = questions[currentQuestion];
+            questionNumber.textContent = "प्रश्न " + (currentQuestion + 1) + " / " + questions.length;
+            attemptCount.textContent = "Attempted: " + answers.filter(function (answer) { return answer !== null; }).length + " / " + questions.length;
+            questionText.textContent = item.question;
+            options.replaceChildren();
+
+            item.options.forEach(function (option, index) {
+                const label = document.createElement("label");
+                label.className = "option";
+                const radio = document.createElement("input");
+                radio.type = "radio";
+                radio.name = "answer";
+                radio.value = index;
+                radio.checked = answers[currentQuestion] === index;
+                radio.addEventListener("change", function () {
+                    answers[currentQuestion] = index;
+                    renderQuestion();
+                });
+                const optionText = document.createElement("span");
+                optionText.textContent = option;
+                label.append(radio, optionText);
+                options.appendChild(label);
+            });
+
+            previousButton.disabled = currentQuestion === 0;
+            nextButton.hidden = readyToSubmit;
+            nextButton.textContent = answers[currentQuestion] === null ? "Next" : "Save & Next";
+            submitButton.hidden = !readyToSubmit;
+            finishButton.hidden = readyToSubmit;
+        }
+
+        function showResult() {
+            ZeroKBPracticeFeatures.recordSubmission("computer-fundamentals", questions, answers, "answer");
+            const total = questions.length;
+            const attempted = answers.filter(function (answer) { return answer !== null; }).length;
+            const correct = answers.filter(function (answer, index) { return answer === questions[index].answer; }).length;
+            const wrong = attempted - correct;
+            const unattempted = total - attempted;
+            const accuracy = attempted ? Math.round((correct / attempted) * 100) : 0;
+
+            practiceHeader.hidden = true;
+            questionCard.hidden = true;
+            resultPanel.hidden = false;
+            resultPanel.replaceChildren();
+            const title = document.createElement("h2");
+            title.textContent = "Quiz result / अभ्यास परिणाम";
+            const score = document.createElement("p");
+            score.className = "result-score";
+            score.textContent = "Score: " + correct + " / " + total;
+            const stats = document.createElement("div");
+            stats.className = "result-stats";
+            [["Total Questions", total], ["Attempted", attempted], ["Unattempted", unattempted], ["Correct", correct], ["Wrong", wrong], ["Score", correct + " / " + total], ["Accuracy", accuracy + "%"]].forEach(function (stat) {
+                const item = document.createElement("div");
+                const value = document.createElement("strong");
+                value.textContent = stat[1];
+                const label = document.createElement("span");
+                label.textContent = stat[0];
+                item.append(value, label);
+                stats.appendChild(item);
+            });
+
+            const reviewButton = document.createElement("button");
+            reviewButton.type = "button";
+            reviewButton.textContent = "उत्तर जाँचें / Answer Review";
+            const reviewList = document.createElement("div");
+            reviewList.hidden = true;
+            questions.forEach(function (item, index) {
+                const reviewItem = document.createElement("article");
+                reviewItem.className = "review-item";
+                const question = document.createElement("h3");
+                question.textContent = (index + 1) + ". " + item.question;
+                const selected = document.createElement("p");
+                selected.textContent = "Your answer / आपका उत्तर: " + (answers[index] === null ? "Unattempted" : item.options[answers[index]]);
+                const correctAnswer = document.createElement("p");
+                correctAnswer.textContent = "Correct answer / सही उत्तर: " + item.options[item.answer];
+                const explanation = document.createElement("p");
+                explanation.textContent = "Explanation / व्याख्या: " + item.explanation;
+                reviewItem.append(question, selected, correctAnswer, explanation);
+                reviewList.appendChild(reviewItem);
+            });
+            reviewButton.addEventListener("click", function () {
+                reviewList.hidden = !reviewList.hidden;
+                reviewButton.textContent = reviewList.hidden ? "उत्तर जाँचें / Answer Review" : "Review छिपाएँ / Hide Review";
+            });
+
+            const restartButton = document.createElement("button");
+            restartButton.type = "button";
+            restartButton.className = "secondary";
+            restartButton.textContent = "फिर से शुरू करें";
+            restartButton.addEventListener("click", restartQuiz);
+            const actions = document.createElement("div");
+            actions.className = "actions";
+            actions.append(reviewButton, restartButton);
+            const categoryReview = ZeroKBQuestionReview.attach(stats, questions, answers, "answer");
+            resultPanel.append(title, score, stats, categoryReview, actions, reviewList);
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            readyToSubmit = false;
+            answers.fill(null);
+            practiceHeader.hidden = false;
+            questionCard.hidden = false;
+            resultPanel.hidden = true;
+            renderQuestion();
+        }
+
+        previousButton.addEventListener("click", function () {
+            if (readyToSubmit) readyToSubmit = false;
+            else if (currentQuestion > 0) currentQuestion--;
+            renderQuestion();
+        });
+        nextButton.addEventListener("click", function () {
+            if (currentQuestion < questions.length - 1) currentQuestion++;
+            else readyToSubmit = true;
+            renderQuestion();
+        });
+        submitButton.addEventListener("click", showResult);
+        finishButton.addEventListener("click", function () {
+            if (window.confirm("क्या आप अभी quiz समाप्त करके result देखना चाहते हैं?")) showResult();
+        });
+
+        ZeroKBPracticeFeatures.attach({ subjectId: "computer-fundamentals", questions: questions, header: practiceHeader, questionCard: questionCard, questionNumber: questionNumber, getCurrentQuestion: function () { return currentQuestion; } });
+        ZeroKBQuestionReview.attachPalette(practiceHeader, questionCard, questions, answers, function () {
+            return currentQuestion;
+        }, function (index) {
+            currentQuestion = index;
+            renderQuestion();
+        });
+        renderQuestion();
+    </script>
+    <script src="zerokb-profile.js"></script>
+    <script src="zerokb-user.js"></script>
+    <script src="zerokb-shell.js"></script>
+</body>
+</html>

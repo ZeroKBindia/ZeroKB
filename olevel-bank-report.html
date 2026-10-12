@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ZeroKB | O Level Bank Validation</title>
+    <link rel="stylesheet" href="zerokb.css">
+    <link rel="stylesheet" href="zerokb-user.css">
+    <link rel="stylesheet" href="olevel.css">
+    <script src="olevel-catalog.js" defer></script>
+    <script src="olevel-question-utils.js" defer></script>
+    <script src="olevel-data-m1.js" defer></script>
+    <script src="olevel-data-m2.js" defer></script>
+    <script src="olevel-data-m3.js" defer></script>
+    <script src="olevel-data-m4.js" defer></script>
+    <script src="olevel-bank-report.js" defer></script>
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="olevel.html">ZeroKB</a>
+        <nav aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="ccc.html">CCC</a>
+            <a href="olevel.html">O Level</a>
+            <a href="olevel.html#papers">Mock Tests</a>
+            <a href="olevel.html#chapter-tests">Practice Tests</a>
+            <a href="ccc.html#study-material">Study Materials</a>
+            <a href="customize-test.html">Results &amp; Analysis</a>
+        </nav>
+    </header>
+    <main class="page-shell">
+        <p class="eyebrow">O Level question bank</p>
+        <h1>Validation and coverage report</h1>
+        <p>This report counts only the question records currently loaded from the four O Level data files. Automated schema and similarity checks do not replace subject-matter review for ambiguous wording or answer defensibility.</p>
+        <p id="report-summary" class="notice" role="status">Loading question banks…</p>
+        <div id="report-tables"></div>
+        <details><summary>Validation errors, warnings and near-duplicate candidates</summary><pre id="report-issues"></pre></details>
+    </main>
+    <script src="zerokb-profile.js"></script>
+    <script src="zerokb-shell.js"></script>
+</body>
+</html>

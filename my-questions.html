@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Review saved ZeroKB practice questions and improve on past mistakes.">
+    <title>ZeroKB | My Saved Questions</title>
+    <link rel="stylesheet" href="zerokb.css">
+    <link rel="stylesheet" href="zerokb-user.css">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="ccc.html">ZeroKB</a>
+        <nav class="practice-feature-links" aria-label="Practice tools">
+            <a id="saved-tab" href="my-questions.html?view=saved">🔖 My Saved Questions</a>
+            <a id="mistakes-tab" href="my-questions.html?view=mistakes">❌ My Mistakes</a>
+        </nav>
+        <a class="back-link" href="ccc.html">← सभी विषय</a>
+    </header>
+
+    <section class="intro">
+        <p class="eyebrow">Learn • Practice • Master</p>
+        <h1 id="page-title">🔖 My Saved Questions</h1>
+        <p>अपने saved सवाल फिर से देखें और जिन प्रश्नों में गलती हुई है उनका अभ्यास करें।</p>
+    </section>
+
+    <main class="question-library">
+        <div class="question-library-toolbar">
+            <p id="question-count" class="question-count" aria-live="polite"></p>
+            <label for="subject-filter">Subject
+                <select id="subject-filter">
+                    <option value="">All Subjects</option>
+                </select>
+            </label>
+            <button id="clear-mistakes" class="secondary" type="button" hidden>Clear All Mistakes</button>
+        </div>
+        <section id="question-list" class="saved-question-list" aria-live="polite"></section>
+    </main>
+
+    <footer>© 2026 ZeroKB · Learn • Practice • Master</footer>
+    <script src="zerokb-practice-features.js"></script>
+    <script>ZeroKBPracticeFeatures.buildList();</script>
+    <script src="zerokb-profile.js"></script>
+    <script src="zerokb-user.js"></script>
+    <script src="zerokb-shell.js"></script>
+</body>
+</html>

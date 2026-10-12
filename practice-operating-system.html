@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Operating System के लिए स्वयं बनाए गए bilingual CCC और O Level practice questions।">
+    <title>ZeroKB | Operating System Practice</title>
+    <style>
+        :root {
+            --ink: #172a3a;
+            --muted: #5c6d79;
+            --paper: #f5f1e8;
+            --white: #fffdf8;
+            --teal: #087f8c;
+            --teal-dark: #075e68;
+            --yellow: #f2c14e;
+            --coral: #e87861;
+            --line: #d9d6cc;
+            --success: #247a58;
+            --error: #b84c3d;
+            --shadow: 0 18px 45px rgba(23, 42, 58, 0.12);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: Georgia, "Noto Serif Devanagari", serif;
+            line-height: 1.6;
+        }
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1180px;
+            margin: auto;
+            padding: 22px 28px;
+        }
+        .brand {
+            color: var(--ink);
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: .04em;
+            text-decoration: none;
+        }
+        .brand span { color: var(--teal); }
+        .back-link {
+            color: var(--muted);
+            font-family: Arial, sans-serif;
+            font-size: .9rem;
+            text-decoration: none;
+        }
+        .back-link:hover { color: var(--teal); }
+        .intro {
+            max-width: 1180px;
+            margin: 18px auto 0;
+            padding: 52px 8%;
+            background: var(--teal);
+            color: var(--white);
+            box-shadow: var(--shadow);
+        }
+        .eyebrow {
+            margin: 0 0 12px;
+            color: var(--yellow);
+            font-family: Arial, sans-serif;
+            font-size: .76rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+        }
+        h1 {
+            max-width: 760px;
+            margin: 0;
+            font-size: clamp(2.2rem, 5vw, 4.2rem);
+            line-height: 1.08;
+        }
+        .intro p:last-child {
+            max-width: 700px;
+            margin: 20px 0 0;
+            color: #d7f0ed;
+            font-size: 1.08rem;
+        }
+        main { max-width: 900px; margin: auto; padding: 64px 28px 72px; }
+        .practice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 18px;
+        }
+        .question-number {
+            color: var(--teal-dark);
+            font-family: Arial, sans-serif;
+            font-size: .86rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+        .score {
+            padding: 8px 13px;
+            border: 1px solid var(--line);
+            background: var(--white);
+            color: var(--teal-dark);
+            font-family: Arial, sans-serif;
+            font-size: .86rem;
+            font-weight: 700;
+        }
+        .question-card {
+            padding: clamp(24px, 5vw, 42px);
+            border: 1px solid var(--line);
+            border-top: 5px solid var(--yellow);
+            background: var(--white);
+            box-shadow: 0 10px 25px rgba(23, 42, 58, 0.06);
+        }
+        h2 { margin: 0 0 28px; font-size: clamp(1.25rem, 3vw, 1.8rem); line-height: 1.45; white-space: pre-line; }
+        .options { display: grid; gap: 11px; }
+        .option {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 15px;
+            border: 1px solid var(--line);
+            background: #fffefa;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .option:hover { border-color: var(--teal); }
+        .option input { flex: 0 0 17px; width: 17px; height: 17px; margin: 4px 0 0; accent-color: var(--teal); }
+        .option:has(input:checked) { border-color: var(--teal); background: #edf7f5; }
+        .option:has(input:disabled) { cursor: default; }
+        .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+        button {
+            padding: 12px 19px;
+            border: 1px solid var(--teal);
+            background: var(--teal);
+            color: var(--white);
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: .88rem;
+            font-weight: 700;
+        }
+        button:hover { background: var(--teal-dark); }
+        button.secondary { background: transparent; color: var(--teal-dark); }
+        button.secondary:hover:not(:disabled) { background: var(--teal); color: var(--white); }
+        button:disabled { cursor: default; opacity: .55; }
+        button.secondary:disabled { background: transparent; color: var(--teal-dark); }
+        .feedback {
+            margin-top: 22px;
+            padding: 16px 18px;
+            border-left: 4px solid var(--teal);
+            background: #edf7f5;
+        }
+        .feedback.correct { border-left-color: var(--success); background: #edf7f1; }
+        .feedback.incorrect { border-left-color: var(--error); background: #fff1ee; }
+        .feedback strong { display: block; margin-bottom: 4px; font-family: Arial, sans-serif; }
+        .feedback p { margin: 0; color: var(--muted); }
+        .feedback.correct strong { color: var(--success); }
+        .feedback.incorrect strong { color: var(--error); }
+        .notice { margin: 22px 0 0; color: var(--muted); font-size: .86rem; }
+        .result-card h2 { margin-bottom: 18px; }
+        .result-score { margin: 8px 0 24px; color: var(--teal-dark); font-family: Arial, sans-serif; font-size: 2.4rem; font-weight: 700; }
+        .result-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .result-stats div { padding: 14px; border: 1px solid var(--line); background: #fffefa; }
+        .result-stats strong, .result-stats span { display: block; }
+        .result-stats strong { color: var(--teal-dark); font-family: Arial, sans-serif; font-size: 1.25rem; }
+        .result-stats span { color: var(--muted); font-size: .88rem; }
+        footer {
+            padding: 24px 28px;
+            background: var(--ink);
+            color: #c3d0d1;
+            font-family: Arial, sans-serif;
+            font-size: .85rem;
+            text-align: center;
+        }
+        @media (max-width: 600px) {
+            .topbar { padding: 18px 20px; }
+            .back-link { font-size: .78rem; }
+            .intro { margin-top: 0; padding: 52px 24px; }
+            main { padding: 48px 20px 60px; }
+            .practice-header { align-items: flex-start; flex-direction: column; gap: 10px; }
+            .question-card { padding: 24px 18px; }
+            .actions button { flex: 1 1 100%; }
+            .result-stats { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+    <link rel="stylesheet" href="zerokb.css">
+    <link rel="stylesheet" href="zerokb-user.css">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="ccc.html">ZeroKB</a>
+        <a class="back-link" href="ccc.html">← सभी विषय</a>
+    </header>
+
+    <section class="intro">
+        <p class="eyebrow">CCC &amp; O Level practice</p>
+        <h1>Operating System Practice</h1>
+        <p>Operating System के महत्वपूर्ण topics पर bilingual अभ्यास करें। ये इस वेबसाइट के लिए स्वयं बनाए गए practice questions हैं, आधिकारिक PYQs नहीं।</p>
+    </section>
+
+    <main>
+        <div class="practice-header" id="practice-header">
+            <span class="question-number" id="question-number">प्रश्न 1 / 50</span>
+            <span class="score" id="attempt-count">Attempted: 0 / 50</span>
+        </div>
+        <section class="question-card" id="question-card" aria-live="polite">
+            <h2 id="question-text"></h2>
+            <div class="options" id="options"></div>
+            <div class="actions">
+                <button class="secondary" id="previous-button" type="button">पिछला प्रश्न</button>
+                <button id="next-button" type="button">Next</button>
+                <button id="submit-button" type="button" hidden>Submit Quiz</button>
+                <button class="secondary" id="finish-button" type="button">End Quiz / Quiz समाप्त करें</button>
+            </div>
+        </section>
+        <section class="question-card result-card" id="result-panel" aria-live="polite" hidden></section>
+        <p class="notice">अभ्यास प्रश्न सीखने और revision के लिए हैं।</p>
+    </main>
+
+    <footer>© 2026 ZeroKB · Learn • Practice • Master</footer>
+
+    <script src="practice-review.js"></script>
+    <script src="zerokb-practice-features.js"></script>
+    <script>
+        // प्रश्नों को इसी array में जोड़ें या बदलें। answer में सही विकल्प का zero-based index रखें।
+        const questions = [
+            { question: "What is an operating system?\nOperating System क्या है?", options: ["A system software that manages computer resources / कंप्यूटर संसाधनों को manage करने वाला system software", "A device used only for printing / केवल printing के लिए उपयोग होने वाला device", "A type of computer virus / computer virus का एक प्रकार", "A programming language only / केवल एक programming language"], answer: 0, explanation: "Operating System hardware और applications के बीच काम करके system resources और सेवाओं को manage करता है।" },
+            { question: "Which is a primary purpose of an operating system?\nOperating System का मुख्य उद्देश्य क्या है?", options: ["Manage hardware and provide services to programs / hardware manage करना और programs को सेवाएँ देना", "Create electricity for the computer / कंप्यूटर के लिए बिजली बनाना", "Manufacture computer parts / कंप्यूटर के पुर्जे बनाना", "Replace all application software / सभी application software को बदलना"], answer: 0, explanation: "OS hardware resources का प्रबंधन करता है और applications को चलने के लिए common services देता है।" },
+            { question: "Which software acts as an interface between the user and computer hardware?\nUser और computer hardware के बीच interface का काम कौन करता है?", options: ["Operating system / Operating System", "Spreadsheet / Spreadsheet", "Image file / Image file", "Web page / Web page"], answer: 0, explanation: "Operating System user तथा hardware के बीच interface उपलब्ध कराता है।" },
+            { question: "Which OS function organizes files and folders on storage?\nStorage पर files और folders को व्यवस्थित करना OS का कौन-सा कार्य है?", options: ["File management / File management", "Power generation / बिजली बनाना", "Word processing / Word processing", "Web designing / Web designing"], answer: 0, explanation: "File management में files और folders बनाना, ढूँढना, rename करना, copy करना और हटाना शामिल है।" },
+            { question: "Which OS function allocates RAM to running programs?\nचल रहे programs को RAM देना OS का कौन-सा कार्य है?", options: ["Memory management / Memory management", "Device printing / Device printing", "File compression / File compression", "Screen painting / Screen painting"], answer: 0, explanation: "Memory management programs को memory देता है और उनके उपयोग पर नज़र रखता है।" },
+            { question: "Which OS function decides how CPU time is shared among processes?\nProcesses के बीच CPU time बाँटने का निर्णय OS का कौन-सा कार्य करता है?", options: ["Process management / Process management", "Folder management / Folder management", "Display management only / केवल display management", "Backup management / Backup management"], answer: 0, explanation: "Process management में processes बनाना, schedule करना और उनके execution को नियंत्रित करना शामिल है।" },
+            { question: "What does device management by an OS generally include?\nOS द्वारा device management में सामान्यतः क्या शामिल होता है?", options: ["Coordinating input and output devices / Input और output devices का समन्वय", "Writing user essays / उपयोगकर्ता के निबंध लिखना", "Creating websites / Websites बनाना", "Designing hardware circuits / Hardware circuits design करना"], answer: 0, explanation: "OS device drivers और input/output services की मदद से devices के साथ संचार और संसाधन आवंटन करता है।" },
+            { question: "Which is an example of system software?\nSystem software का उदाहरण कौन-सा है?", options: ["Linux operating system / Linux Operating System", "A photograph / एक photograph", "A music playlist / एक music playlist", "A plain text note / एक साधारण text note"], answer: 0, explanation: "Linux system software है; यह computer resources manage करता है और applications चलाता है।" },
+            { question: "Which is application software rather than system software?\nइनमें से कौन system software के बजाय application software है?", options: ["A word processor / Word processor", "Operating system kernel / Operating System kernel", "Device driver / Device driver", "Boot loader / Boot loader"], answer: 0, explanation: "Word processor उपयोगकर्ता का specific task करता है, जबकि OS, driver और boot loader system software हैं।" },
+            { question: "What is a device driver?\nDevice driver क्या होता है?", options: ["Software that helps the OS communicate with a hardware device / OS को hardware device से संवाद कराने वाला software", "A folder used for documents / Documents के लिए folder", "A computer power cable / Computer की power cable", "A type of spreadsheet / Spreadsheet का एक प्रकार"], answer: 0, explanation: "Device driver OS और किसी hardware device के बीच निर्देशों तथा संचार का माध्यम बनता है।" },
+            { question: "Which operating system type is designed to respond within strict time limits?\nकौन-सा OS type तय समय-सीमा के भीतर response देने के लिए बनाया जाता है?", options: ["Real-time operating system / Real-time Operating System", "Batch operating system / Batch Operating System", "Single-user operating system / Single-user Operating System", "Desktop publishing system / Desktop publishing system"], answer: 0, explanation: "Real-time OS time-critical tasks को निश्चित और सीमित समय में पूरा करने के लिए बनाया जाता है।" },
+            { question: "In a batch operating system, how are jobs commonly processed?\nBatch Operating System में jobs सामान्यतः कैसे process होती हैं?", options: ["In groups with little or no user interaction during execution / समूहों में, execution के समय बहुत कम या बिना user interaction", "Only by drawing icons / केवल icons बनाकर", "One keystroke at a time with a user response / हर keystroke पर user response लेकर", "Only through a web browser / केवल web browser से"], answer: 0, explanation: "Batch system समान jobs को समूह में process करता है; execution के दौरान direct interaction सीमित रहता है।" },
+            { question: "What is a multiuser operating system designed to support?\nMultiuser OS किस सुविधा के लिए बनाया जाता है?", options: ["Multiple users accessing system resources / कई users द्वारा system resources का उपयोग", "Only one file on a computer / कंप्यूटर पर केवल एक file", "Multiple monitors with no users / बिना users के कई monitors", "A computer without memory / बिना memory का computer"], answer: 0, explanation: "Multiuser OS अलग-अलग users को एक system के resources साझा करने देता है, आम तौर पर account और permissions के साथ।" },
+            { question: "What does multitasking allow a computer to do?\nMultitasking computer को क्या करने देता है?", options: ["Run or manage multiple tasks seemingly at the same time / कई tasks को एक ही समय में चलता हुआ manage करना", "Use only one program forever / हमेशा केवल एक program चलाना", "Work without an operating system / OS के बिना काम करना", "Turn files into hardware / Files को hardware में बदलना"], answer: 0, explanation: "Multitasking में OS CPU time बाँटकर कई tasks को साथ-साथ progress करते हुए दिखाता है।" },
+            { question: "Which statement about Microsoft Windows is correct?\nMicrosoft Windows के बारे में कौन-सा कथन सही है?", options: ["It is a family of operating systems with a graphical interface / यह graphical interface वाले Operating Systems का परिवार है", "It is only a text editor / यह केवल text editor है", "It is a computer hardware part / यह computer hardware का भाग है", "It is a Linux command / यह Linux command है"], answer: 0, explanation: "Microsoft Windows एक लोकप्रिय operating system family है, जिसमें सामान्यतः GUI उपलब्ध होता है।" },
+            { question: "Which Windows tool is commonly used to browse files and folders?\nFiles और folders देखने के लिए Windows में सामान्यतः कौन-सा tool है?", options: ["File Explorer / File Explorer", "Task Manager / Task Manager", "Paint / Paint", "Calculator / Calculator"], answer: 0, explanation: "File Explorer से drives, files और folders को browse तथा manage किया जाता है।" },
+            { question: "What is the usual purpose of the Windows taskbar?\nWindows taskbar का सामान्य उपयोग क्या है?", options: ["Access open apps and pinned shortcuts / खुले apps और pinned shortcuts तक पहुँचना", "Store every deleted file permanently / हर deleted file को स्थायी रूप से रखना", "Increase the physical RAM / Physical RAM बढ़ाना", "Format all disks automatically / सभी disks को अपने-आप format करना"], answer: 0, explanation: "Taskbar खुले applications, Start menu और pinned shortcuts तक पहुँचने में मदद करता है।" },
+            { question: "What is the Windows Recycle Bin mainly used for?\nWindows Recycle Bin का मुख्य उपयोग क्या है?", options: ["Temporarily hold many deleted files before permanent removal / कई deleted files को स्थायी हटाने से पहले अस्थायी रूप से रखना", "Store running processes / चल रहे processes रखना", "Install device drivers automatically / Device drivers अपने-आप install करना", "Increase disk size / Disk का आकार बढ़ाना"], answer: 0, explanation: "Recycle Bin से समर्थित deleted files को स्थायी रूप से हटाने से पहले restore किया जा सकता है।" },
+            { question: "Which Windows interface element commonly opens apps and system options?\nWindows में apps और system options खोलने के लिए सामान्यतः कौन-सा interface element है?", options: ["Start menu / Start menu", "Recycle Bin / Recycle Bin", "File extension / File extension", "Desktop wallpaper / Desktop wallpaper"], answer: 0, explanation: "Start menu से applications, settings और power options तक पहुँचा जाता है।" },
+            { question: "What does the file extension usually indicate?\nFile extension सामान्यतः क्या बताता है?", options: ["The file type or format / File का type या format", "The file owner's age / File owner की उम्र", "The monitor resolution / Monitor resolution", "The amount of installed RAM / Installed RAM की मात्रा"], answer: 0, explanation: "Extension जैसे .txt या .jpg आम तौर पर file type का संकेत देती है; केवल extension बदलने से file format नहीं बदलता।" },
+            { question: "What is a folder primarily used for?\nFolder का मुख्य उपयोग क्या है?", options: ["Organizing files and other folders / Files और दूसरे folders को व्यवस्थित करना", "Running the CPU faster / CPU को तेज चलाना", "Displaying only videos / केवल videos दिखाना", "Replacing the operating system / Operating System को बदलना"], answer: 0, explanation: "Folders संबंधित files और subfolders को समूहित करके व्यवस्थित रखने में मदद करते हैं।" },
+            { question: "What is a file path?\nFile path क्या होता है?", options: ["The location of a file in a storage hierarchy / Storage hierarchy में file का स्थान", "A computer's power rating / Computer की power rating", "A keyboard shortcut / Keyboard shortcut", "A type of RAM / RAM का एक प्रकार"], answer: 0, explanation: "Path drive, folders और file name की location बताता है, जैसे C:\\Users\\Student\\notes.txt।" },
+            { question: "Which action creates a duplicate of a selected file in another location?\nचुनी हुई file की दूसरी location पर duplicate copy कौन-सी action बनाती है?", options: ["Copy and paste / Copy और paste", "Cut and paste / Cut और paste", "Rename / Rename", "Delete / Delete"], answer: 0, explanation: "Copy मूल file को वहीं रखता है और चुनी हुई दूसरी location पर उसकी copy बनाता है।" },
+            { question: "What usually happens when a file is renamed?\nFile को rename करने पर सामान्यतः क्या होता है?", options: ["Its name changes while its contents remain / Contents वही रहते हैं और नाम बदलता है", "Its contents are always erased / Contents हमेशा मिट जाते हैं", "The computer restarts / Computer restart होता है", "Its folder becomes a device / उसका folder device बन जाता है"], answer: 0, explanation: "Rename file का नाम बदलता है; यह स्वयं file के contents नहीं बदलता।" },
+            { question: "What is booting?\nBooting क्या है?", options: ["Starting a computer and loading its operating system / Computer शुरू करके उसका Operating System load करना", "Deleting a user account / User account हटाना", "Printing a document / Document print करना", "Changing a folder name / Folder का नाम बदलना"], answer: 0, explanation: "Booting के दौरान system startup होता है और OS memory में load होकर काम के लिए तैयार होता है।" },
+            { question: "What is a cold boot?\nCold boot क्या है?", options: ["Starting a computer from a powered-off state / पूरी तरह बंद computer को चालू करना", "Restarting a running computer / चलते computer को restart करना", "Waking only the monitor / केवल monitor को जगाना", "Starting a text editor / Text editor शुरू करना"], answer: 0, explanation: "Cold boot तब होता है जब बंद system को power देकर शुरू किया जाता है।" },
+            { question: "What is a warm boot?\nWarm boot क्या है?", options: ["Restarting a computer without switching off its main power completely / Main power पूरी तरह बंद किए बिना computer restart करना", "Starting a computer for the first time ever / Computer पहली बार चालू करना", "Connecting a new keyboard / नया keyboard जोड़ना", "Opening a folder / Folder खोलना"], answer: 0, explanation: "Warm boot में running computer को restart किया जाता है, बिना सामान्य cold start की तरह power-off से शुरू किए।" },
+            { question: "Which firmware commonly starts hardware checks and begins the boot process?\nकौन-सा firmware सामान्यतः hardware checks शुरू करके boot process आरंभ करता है?", options: ["BIOS or UEFI / BIOS या UEFI", "Word processor / Word processor", "File Explorer / File Explorer", "Antivirus scan / Antivirus scan"], answer: 0, explanation: "BIOS या आधुनिक UEFI firmware शुरुआती hardware initialization करता है और boot device से OS load करने की प्रक्रिया शुरू करता है।" },
+            { question: "What does GUI stand for?\nGUI का पूरा नाम क्या है?", options: ["Graphical User Interface / Graphical User Interface", "General Utility Instruction / General Utility Instruction", "Global User Internet / Global User Internet", "Graphical Unit Installation / Graphical Unit Installation"], answer: 0, explanation: "GUI यानी Graphical User Interface में windows, icons, menus और pointer जैसे visual elements होते हैं।" },
+            { question: "What is a common feature of a command-line interface (CLI)?\nCommand-line interface (CLI) की सामान्य विशेषता क्या है?", options: ["Users type text commands / Users text commands लिखते हैं", "It works only with touch gestures / यह केवल touch gestures से काम करता है", "It has no way to run programs / इसमें programs चलाने का तरीका नहीं होता", "It is a storage device / यह storage device है"], answer: 0, explanation: "CLI में user keyboard से commands देकर system या programs के साथ काम करता है।" },
+            { question: "Which statement best compares GUI and CLI?\nGUI और CLI की तुलना में कौन-सा कथन सही है?", options: ["GUI uses visual controls; CLI accepts typed commands / GUI visual controls देता है; CLI लिखे हुए commands लेता है", "Both are storage devices / दोनों storage devices हैं", "CLI always needs a mouse / CLI को हमेशा mouse चाहिए", "GUI cannot start applications / GUI applications शुरू नहीं कर सकता"], answer: 0, explanation: "GUI में visual controls से और CLI में text commands से काम किया जाता है।" },
+            { question: "What is virtual memory?\nVirtual memory क्या है?", options: ["Disk space used to extend the apparent memory available to programs / Programs को उपलब्ध apparent memory बढ़ाने के लिए disk space का उपयोग", "A physical keyboard memory chip / Keyboard की physical memory chip", "A folder for images / Images का folder", "A type of printer / Printer का एक प्रकार"], answer: 0, explanation: "Virtual memory में OS storage के हिस्से का उपयोग RAM के पूरक के रूप में करता है; यह RAM जितनी तेज़ नहीं होती।" },
+            { question: "Which memory normally holds programs and data currently in use?\nवर्तमान में उपयोग हो रहे programs और data को सामान्यतः कौन-सी memory रखती है?", options: ["RAM / RAM", "DVD / DVD", "Read-only archive tape / Read-only archive tape", "Printer memory only / केवल printer memory"], answer: 0, explanation: "RAM चल रहे programs और वर्तमान data के लिए मुख्य working memory है और सामान्यतः volatile होती है।" },
+            { question: "What is a process?\nProcess क्या है?", options: ["A program that is currently executing / वर्तमान में execute हो रहा program", "A permanently deleted folder / स्थायी रूप से deleted folder", "A type of file extension / File extension का एक प्रकार", "A powered-off monitor / बंद monitor"], answer: 0, explanation: "Program जब execution में होता है, तो उसे process कहा जाता है।" },
+            { question: "What is the role of a CPU scheduler in an operating system?\nOperating System में CPU scheduler की भूमिका क्या है?", options: ["Select which ready process gets CPU time / तय करना कि ready processes में किसे CPU time मिले", "Rename all user files / सभी user files rename करना", "Clean the monitor / Monitor साफ करना", "Translate every document / हर document का अनुवाद करना"], answer: 0, explanation: "Scheduler ready processes में से अगला process चुनकर CPU उपयोग का क्रम निर्धारित करता है।" },
+            { question: "What is a multitasking operating system expected to do?\nMultitasking Operating System से क्या अपेक्षित है?", options: ["Manage several active tasks by sharing system resources / System resources बाँटकर कई active tasks manage करना", "Run only after removing RAM / RAM हटाने के बाद ही चलना", "Allow only one file per folder / हर folder में केवल एक file रखना", "Replace all input devices / सभी input devices बदलना"], answer: 0, explanation: "OS processor time और अन्य resources बाँटकर कई tasks को आगे बढ़ाता है।" },
+            { question: "Which component helps the OS control a printer or other peripheral?\nPrinter या अन्य peripheral को control करने में OS की कौन-सी component मदद करती है?", options: ["Device driver / Device driver", "File extension / File extension", "Desktop icon / Desktop icon", "Text cursor / Text cursor"], answer: 0, explanation: "Device driver device-specific commands और communication को OS के लिए उपलब्ध कराता है।" },
+            { question: "Which of these is a utility program?\nइनमें से कौन utility program है?", options: ["Backup utility / Backup utility", "A photo file / Photo file", "A keyboard key / Keyboard key", "A monitor stand / Monitor stand"], answer: 0, explanation: "Backup utility user data की अतिरिक्त copy बनाने और restore करने में मदद करती है।" },
+            { question: "What is the purpose of antivirus utility software?\nAntivirus utility software का उद्देश्य क्या है?", options: ["Detect, block, or help remove malicious software / Malicious software को पहचानना, रोकना या हटाने में मदद करना", "Create physical memory chips / Physical memory chips बनाना", "Increase screen size / Screen का आकार बढ़ाना", "Print every folder / हर folder print करना"], answer: 0, explanation: "Antivirus utility malware की पहचान और रोकथाम में मदद करती है; इसे updated रखना उपयोगी है।" },
+            { question: "What does a file compression utility usually do?\nFile compression utility सामान्यतः क्या करती है?", options: ["Reduces file size or packages files together / File का आकार घटाती है या कई files को साथ package करती है", "Increases physical RAM / Physical RAM बढ़ाती है", "Changes a monitor into a printer / Monitor को printer बनाती है", "Starts the computer firmware / Computer firmware शुरू करती है"], answer: 0, explanation: "Compression utility files को कम जगह में रखने या archive के रूप में साथ रखने में मदद करती है।" },
+            { question: "Which Windows command displays files and folders in the current directory?\nवर्तमान directory की files और folders दिखाने वाला Windows command कौन-सा है?", options: ["dir / dir", "ls / ls", "pwd / pwd", "mkdir / mkdir"], answer: 0, explanation: "Windows Command Prompt में dir वर्तमान directory की entries दिखाता है।" },
+            { question: "Which Windows Command Prompt command changes the current directory?\nWindows Command Prompt में current directory बदलने का command कौन-सा है?", options: ["cd / cd", "dir / dir", "del / del", "copy / copy"], answer: 0, explanation: "cd (change directory) current working directory बदलने के लिए उपयोग होता है।" },
+            { question: "Which Windows command creates a new directory?\nWindows में नई directory बनाने का command कौन-सा है?", options: ["mkdir / mkdir", "dir / dir", "type / type", "cls / cls"], answer: 0, explanation: "mkdir नई directory बनाता है; Windows में md भी इसका सामान्य alias है।" },
+            { question: "Which Linux command lists files and directories?\nLinux में files और directories की सूची दिखाने वाला command कौन-सा है?", options: ["ls / ls", "dir / dir", "cd / cd", "pwd / pwd"], answer: 0, explanation: "Linux में ls वर्तमान directory की files और directories की सूची देता है।" },
+            { question: "Which Linux command prints the current working directory?\nLinux में current working directory दिखाने वाला command कौन-सा है?", options: ["pwd / pwd", "cp / cp", "rm / rm", "mkdir / mkdir"], answer: 0, explanation: "pwd का अर्थ print working directory है; यह वर्तमान directory का path दिखाता है।" },
+            { question: "Which Linux command changes the current directory?\nLinux में current directory बदलने का command कौन-सा है?", options: ["cd / cd", "ls / ls", "cat / cat", "pwd / pwd"], answer: 0, explanation: "cd के बाद directory path देकर Linux में स्थान बदला जाता है।" },
+            { question: "Which Linux command creates a directory?\nLinux में directory बनाने का command कौन-सा है?", options: ["mkdir / mkdir", "rm / rm", "cp / cp", "cat / cat"], answer: 0, explanation: "mkdir (make directory) Linux में नई directory बनाता है।" },
+            { question: "Which Linux command copies files or directories?\nLinux में files या directories copy करने का command कौन-सा है?", options: ["cp / cp", "rm / rm", "pwd / pwd", "cd / cd"], answer: 0, explanation: "cp source और destination देकर files copy करता है; directories के लिए अक्सर recursive option चाहिए।" },
+            { question: "Which Windows command clears the Command Prompt screen?\nWindows Command Prompt की screen साफ करने वाला command कौन-सा है?", options: ["cls / cls", "dir / dir", "copy / copy", "mkdir / mkdir"], answer: 0, explanation: "cls Command Prompt में दिखाई दे रहे text को साफ करता है; यह files को delete नहीं करता।" },
+            { question: "Which Linux command removes a file?\nLinux में file हटाने का command कौन-सा है?", options: ["rm / rm", "ls / ls", "pwd / pwd", "mkdir / mkdir"], answer: 0, explanation: "rm files हटाता है; command का उपयोग सोच-समझकर करें क्योंकि हटाई गई file वापस पाना कठिन हो सकता है।" }
+        ];
+
+        const answerPositions = [1, 2, 1, 0, 3, 0, 1, 0, 3, 1, 1, 2, 0, 1, 3, 2, 0, 0, 2, 0, 0, 3, 2, 2, 3, 1, 3, 0, 1, 0, 2, 0, 3, 1, 3, 3, 2, 2, 3, 3, 1, 2, 1, 0, 1, 2, 3, 2, 1, 0];
+        const difficulties = Array.from({ length: 50 }, function (_, index) {
+            return index < 10 ? "Easy" : index < 35 ? "Moderate" : "Hard";
+        });
+        questions.forEach(function (item, index) {
+            const targetAnswer = answerPositions[index];
+            const correctOption = item.options[item.answer];
+            item.options[item.answer] = item.options[targetAnswer];
+            item.options[targetAnswer] = correctOption;
+            item.answer = targetAnswer;
+            item.difficulty = difficulties[index];
+        });
+
+        let currentQuestion = 0;
+        let readyToSubmit = false;
+        const answers = questions.map(function () { return null; });
+
+        const questionNumber = document.getElementById("question-number");
+        const attemptCount = document.getElementById("attempt-count");
+        const questionText = document.getElementById("question-text");
+        const optionsContainer = document.getElementById("options");
+        const previousButton = document.getElementById("previous-button");
+        const nextButton = document.getElementById("next-button");
+        const submitButton = document.getElementById("submit-button");
+        const finishButton = document.getElementById("finish-button");
+        const questionCard = document.getElementById("question-card");
+        const resultPanel = document.getElementById("result-panel");
+        const practiceHeader = document.getElementById("practice-header");
+
+        function renderQuestion() {
+            const item = questions[currentQuestion];
+            questionNumber.textContent = "प्रश्न " + (currentQuestion + 1) + " / " + questions.length;
+            attemptCount.textContent = "Attempted: " + answers.filter(function (answer) { return answer !== null; }).length + " / " + questions.length;
+            questionText.textContent = item.question;
+            optionsContainer.replaceChildren();
+
+            item.options.forEach(function (option, index) {
+                const label = document.createElement("label");
+                label.className = "option";
+                const radio = document.createElement("input");
+                radio.type = "radio";
+                radio.name = "answer";
+                radio.value = index;
+                radio.checked = answers[currentQuestion] === index;
+                radio.addEventListener("change", function () {
+                    answers[currentQuestion] = index;
+                    renderQuestion();
+                });
+                const optionText = document.createElement("span");
+                optionText.textContent = option;
+                label.append(radio, optionText);
+                optionsContainer.appendChild(label);
+            });
+
+            previousButton.disabled = currentQuestion === 0;
+            nextButton.hidden = readyToSubmit;
+            nextButton.textContent = answers[currentQuestion] === null ? "Next" : "Save & Next";
+            submitButton.hidden = !readyToSubmit;
+            finishButton.hidden = readyToSubmit;
+        }
+
+        function showResult() {
+            ZeroKBPracticeFeatures.recordSubmission("operating-system", questions, answers, "answer");
+            const total = questions.length;
+            const attempted = answers.filter(function (answer) { return answer !== null; }).length;
+            const correct = answers.filter(function (answer, index) { return answer === questions[index].answer; }).length;
+            const wrong = attempted - correct;
+            const unattempted = total - attempted;
+            const accuracy = attempted ? Math.round((correct / attempted) * 100) : 0;
+
+            practiceHeader.hidden = true;
+            questionCard.hidden = true;
+            resultPanel.hidden = false;
+            resultPanel.replaceChildren();
+            const title = document.createElement("h2");
+            title.textContent = "Quiz result / अभ्यास परिणाम";
+            const score = document.createElement("p");
+            score.className = "result-score";
+            score.textContent = "Score: " + correct + " / " + total;
+            const stats = document.createElement("div");
+            stats.className = "result-stats";
+            [["Total Questions", total], ["Attempted", attempted], ["Unattempted", unattempted], ["Correct", correct], ["Wrong", wrong], ["Score", correct + " / " + total], ["Accuracy", accuracy + "%"]].forEach(function (stat) {
+                const item = document.createElement("div");
+                const value = document.createElement("strong");
+                value.textContent = stat[1];
+                const label = document.createElement("span");
+                label.textContent = stat[0];
+                item.append(value, label);
+                stats.appendChild(item);
+            });
+
+            const reviewButton = document.createElement("button");
+            reviewButton.type = "button";
+            reviewButton.textContent = "उत्तर जाँचें / Answer Review";
+            const reviewList = document.createElement("div");
+            reviewList.hidden = true;
+            questions.forEach(function (item, index) {
+                const reviewItem = document.createElement("article");
+                reviewItem.className = "review-item";
+                const question = document.createElement("h3");
+                question.textContent = (index + 1) + ". " + item.question;
+                const selected = document.createElement("p");
+                selected.textContent = "Your answer / आपका उत्तर: " + (answers[index] === null ? "Unattempted" : item.options[answers[index]]);
+                const correctAnswer = document.createElement("p");
+                correctAnswer.textContent = "Correct answer / सही उत्तर: " + item.options[item.answer];
+                const explanation = document.createElement("p");
+                explanation.textContent = "Explanation / व्याख्या: " + item.explanation;
+                reviewItem.append(question, selected, correctAnswer, explanation);
+                reviewList.appendChild(reviewItem);
+            });
+            reviewButton.addEventListener("click", function () {
+                reviewList.hidden = !reviewList.hidden;
+                reviewButton.textContent = reviewList.hidden ? "उत्तर जाँचें / Answer Review" : "Review छिपाएँ / Hide Review";
+            });
+
+            const restartButton = document.createElement("button");
+            restartButton.type = "button";
+            restartButton.className = "secondary";
+            restartButton.textContent = "फिर से शुरू करें";
+            restartButton.addEventListener("click", restartQuiz);
+            const actions = document.createElement("div");
+            actions.className = "actions";
+            actions.append(reviewButton, restartButton);
+            const categoryReview = ZeroKBQuestionReview.attach(stats, questions, answers, "answer");
+            resultPanel.append(title, score, stats, categoryReview, actions, reviewList);
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            readyToSubmit = false;
+            answers.fill(null);
+            practiceHeader.hidden = false;
+            questionCard.hidden = false;
+            resultPanel.hidden = true;
+            renderQuestion();
+        }
+
+        previousButton.addEventListener("click", function () {
+            if (readyToSubmit) readyToSubmit = false;
+            else if (currentQuestion > 0) currentQuestion--;
+            renderQuestion();
+        });
+        nextButton.addEventListener("click", function () {
+            if (currentQuestion < questions.length - 1) currentQuestion++;
+            else readyToSubmit = true;
+            renderQuestion();
+        });
+        submitButton.addEventListener("click", showResult);
+        finishButton.addEventListener("click", function () {
+            if (window.confirm("क्या आप अभी quiz समाप्त करके result देखना चाहते हैं?")) showResult();
+        });
+
+        ZeroKBPracticeFeatures.attach({ subjectId: "operating-system", questions: questions, header: practiceHeader, questionCard: questionCard, questionNumber: questionNumber, getCurrentQuestion: function () { return currentQuestion; } });
+        ZeroKBQuestionReview.attachPalette(practiceHeader, questionCard, questions, answers, function () {
+            return currentQuestion;
+        }, function (index) {
+            currentQuestion = index;
+            renderQuestion();
+        });
+        renderQuestion();
+            practiceHeader.hidden = false;
+    </script>
+    <script src="zerokb-profile.js"></script>
+    <script src="zerokb-user.js"></script>
+    <script src="zerokb-shell.js"></script>
+</body>
+</html>

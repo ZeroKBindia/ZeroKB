@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ZeroKB | O Level Test</title>
+    <link rel="stylesheet" href="zerokb.css">
+    <link rel="stylesheet" href="zerokb-user.css">
+    <link rel="stylesheet" href="olevel.css">
+    <script src="olevel-catalog.js" defer></script>
+    <script src="olevel-question-utils.js" defer></script>
+    <script src="olevel-data-m1.js" defer></script>
+    <script src="olevel-data-m2.js" defer></script>
+    <script src="olevel-data-m3.js" defer></script>
+    <script src="olevel-data-m4.js" defer></script>
+    <script src="olevel-test.js" defer></script>
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="olevel.html">ZeroKB</a>
+        <nav aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="ccc.html">CCC</a>
+            <a href="olevel.html">O Level</a>
+            <a href="olevel.html#papers">Mock Tests</a>
+            <a href="olevel.html#chapter-tests">Practice Tests</a>
+            <a href="ccc.html#study-material">Study Materials</a>
+            <a href="customize-test.html">Results &amp; Analysis</a>
+        </nav>
+    </header>
+    <main class="page-shell test-shell">
+        <p class="eyebrow">O Level · Revision 5.1</p>
+        <h1 class="test-title" id="paper-title">Loading paper…</h1>
+        <div id="load-error" class="notice error" role="alert" hidden></div>
+
+        <section id="setup" class="panel">
+            <div id="setup-message" class="notice" role="status"></div>
+            <div class="setup-grid">
+                <div class="field">
+                    <label for="mode">Test type</label>
+                    <select id="mode"><option value="chapter">Chapter-wise</option><option value="paper">Paper-wise practice</option><option value="mock">Full mock (100 questions)</option></select>
+                </div>
+                <div class="field" id="chapter-mode-field">
+                    <label for="chapter-mode">Chapter selection</label>
+                    <select id="chapter-mode"><option value="single">One chapter</option><option value="mix">Mix selected chapters</option></select>
+                </div>
+                <div class="field" id="single-chapter-field">
+                    <label for="chapter">Chapter</label>
+                    <select id="chapter"></select>
+                </div>
+                <div class="field" id="mixed-chapters-field" hidden>
+                    <span>Choose chapters within this paper</span>
+                    <div id="chapters" class="chapter-checks"></div>
+                </div>
+                <div class="field" id="difficulty-field">
+                    <span>Difficulty</span>
+                    <div class="choice-row">
+                        <label><input type="checkbox" name="difficulty" value="Easy"> Easy</label>
+                        <label><input type="checkbox" name="difficulty" value="Moderate" checked> Moderate</label>
+                        <label><input type="checkbox" name="difficulty" value="Hard" checked> Hard</label>
+                    </div>
+                </div>
+                <div class="field" id="count-field">
+                    <label for="count">Question count</label>
+                    <select id="count">
+                        <option value="10">10</option><option value="20">20</option><option value="30">30</option>
+                        <option value="50">50</option><option value="all">All available</option>
+                    </select>
+                </div>
+                <div class="field" id="duration-field">
+                    <label for="duration">Practice duration</label>
+                    <select id="duration">
+                        <option value="10">10 minutes</option><option value="20" selected>20 minutes</option>
+                        <option value="30">30 minutes</option><option value="60">60 minutes</option><option value="120">120 minutes</option>
+                    </select>
+                </div>
+            </div>
+            <p id="availability" class="notice" aria-live="polite"></p>
+            <button id="start" class="button" type="button" disabled>Loading and validating question bank…</button>
+            <details class="bank-diagnostics">
+                <summary>Question-bank diagnostics</summary>
+                <pre id="diagnostics" aria-live="polite"></pre>
+            </details>
+        </section>
+
+        <section id="active-test" class="panel" hidden>
+            <div class="test-toolbar">
+                <strong id="progress"></strong>
+                <span id="timer" class="timer" aria-live="polite"></span>
+                <button id="toggle-palette" class="button button-secondary" type="button" aria-expanded="true">Hide question palette</button>
+            </div>
+            <div id="palette" class="palette" aria-label="Question palette"></div>
+            <div class="palette-legend"><span>● Current</span><span>● Attempted</span><span>● Unanswered</span></div>
+            <article class="question-card">
+                <div id="question-meta" class="question-meta"></div>
+                <h2 id="question-en" class="question-en"></h2>
+                <p id="question-hi" class="question-hi" lang="hi"></p>
+                <div id="options" class="options"></div>
+            </article>
+            <div class="action-row">
+                <button id="previous" class="button button-secondary" type="button">Previous</button>
+                <button id="save-next" class="button" type="button">Save &amp; Next</button>
+                <button id="next" class="button button-secondary" type="button">Next</button>
+                <button id="submit" class="button" type="button">Submit Test</button>
+            </div>
+        </section>
+
+        <section id="results" class="panel" hidden>
+            <h2>Test result</h2>
+            <div id="result-stats" class="result-stats"></div>
+            <h3>Chapter-wise performance</h3>
+            <div id="chapter-results"></div>
+            <nav id="result-links" class="result-links" aria-label="Filter answer review"></nav>
+            <div id="review"></div>
+            <a class="button button-secondary" href="olevel.html">Back to O Level dashboard</a>
+        </section>
+    </main>
+    <script src="zerokb-profile.js"></script>
+    <script src="zerokb-shell.js"></script>
+</body>
+</html>

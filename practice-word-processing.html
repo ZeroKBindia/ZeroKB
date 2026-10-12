@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LibreOffice Writer और Word Processing के bilingual CCC तथा O Level practice questions।">
+    <title>ZeroKB | Word Processing Practice</title>
+    <style>
+        :root {
+            --ink: #172a3a;
+            --muted: #5c6d79;
+            --paper: #f5f1e8;
+            --white: #fffdf8;
+            --teal: #087f8c;
+            --teal-dark: #075e68;
+            --yellow: #f2c14e;
+            --line: #d9d6cc;
+            --success: #247a58;
+            --error: #b84c3d;
+            --shadow: 0 18px 45px rgba(23, 42, 58, 0.12);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: Georgia, "Noto Serif Devanagari", serif;
+            line-height: 1.6;
+        }
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1180px;
+            margin: auto;
+            padding: 22px 28px;
+        }
+        .brand {
+            color: var(--ink);
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: .04em;
+            text-decoration: none;
+        }
+        .brand span { color: var(--teal); }
+        .back-link {
+            color: var(--muted);
+            font-family: Arial, sans-serif;
+            font-size: .9rem;
+            text-decoration: none;
+        }
+        .back-link:hover { color: var(--teal); }
+        .intro {
+            max-width: 1180px;
+            margin: 18px auto 0;
+            padding: 52px 8%;
+            background: var(--teal);
+            color: var(--white);
+            box-shadow: var(--shadow);
+        }
+        .eyebrow {
+            margin: 0 0 12px;
+            color: var(--yellow);
+            font-family: Arial, sans-serif;
+            font-size: .76rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+        }
+        h1 {
+            max-width: 760px;
+            margin: 0;
+            font-size: clamp(2.2rem, 5vw, 4.2rem);
+            line-height: 1.08;
+        }
+        .intro p:last-child {
+            max-width: 700px;
+            margin: 20px 0 0;
+            color: #d7f0ed;
+            font-size: 1.08rem;
+        }
+        main { max-width: 900px; margin: auto; padding: 64px 28px 72px; }
+        .practice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 18px;
+        }
+        .question-number {
+            color: var(--teal-dark);
+            font-family: Arial, sans-serif;
+            font-size: .86rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+        .score {
+            padding: 8px 13px;
+            border: 1px solid var(--line);
+            background: var(--white);
+            color: var(--teal-dark);
+            font-family: Arial, sans-serif;
+            font-size: .86rem;
+            font-weight: 700;
+        }
+        .question-card {
+            padding: clamp(24px, 5vw, 42px);
+            border: 1px solid var(--line);
+            border-top: 5px solid var(--yellow);
+            background: var(--white);
+            box-shadow: 0 10px 25px rgba(23, 42, 58, 0.06);
+        }
+        h2 { margin: 0 0 28px; font-size: clamp(1.25rem, 3vw, 1.8rem); line-height: 1.45; }
+        .question-hindi { display: block; margin-top: 8px; color: var(--muted); font-size: .92em; font-weight: 400; }
+        .options { display: grid; gap: 11px; }
+        .option {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 15px;
+            border: 1px solid var(--line);
+            background: #fffefa;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .option:hover { border-color: var(--teal); }
+        .option input { flex: 0 0 17px; width: 17px; height: 17px; margin: 4px 0 0; accent-color: var(--teal); }
+        .option:has(input:checked) { border-color: var(--teal); background: #edf7f5; }
+        .option:has(input:disabled) { cursor: default; }
+        .option-copy { display: grid; gap: 3px; }
+        .option-copy span:last-child { color: var(--muted); }
+        .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+        button {
+            padding: 12px 19px;
+            border: 1px solid var(--teal);
+            background: var(--teal);
+            color: var(--white);
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: .88rem;
+            font-weight: 700;
+        }
+        button:hover { background: var(--teal-dark); }
+        button.secondary { background: transparent; color: var(--teal-dark); }
+        button.secondary:hover:not(:disabled) { background: var(--teal); color: var(--white); }
+        button:disabled { cursor: default; opacity: .55; }
+        button.secondary:disabled { background: transparent; color: var(--teal-dark); }
+        .notice { margin: 22px 0 0; color: var(--muted); font-size: .86rem; }
+        .result-card h2 { margin-bottom: 18px; }
+        .result-score { margin: 8px 0 24px; color: var(--teal-dark); font-family: Arial, sans-serif; font-size: 2.4rem; font-weight: 700; }
+        .result-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .result-stats div { padding: 14px; border: 1px solid var(--line); background: #fffefa; }
+        .result-stats strong, .result-stats span { display: block; }
+        .result-stats strong { color: var(--teal-dark); font-family: Arial, sans-serif; font-size: 1.25rem; }
+        .result-stats span { color: var(--muted); font-size: .88rem; }
+        .review-item { margin-top: 14px; padding: 18px; border: 1px solid var(--line); background: #fffefa; }
+        .review-item h3 { margin: 0 0 10px; font-size: 1.05rem; }
+        .review-item p { margin: 6px 0; color: var(--muted); }
+        footer {
+            padding: 24px 28px;
+            background: var(--ink);
+            color: #c3d0d1;
+            font-family: Arial, sans-serif;
+            font-size: .85rem;
+            text-align: center;
+        }
+        @media (max-width: 600px) {
+            .topbar { padding: 18px 20px; }
+            .back-link { font-size: .78rem; }
+            .intro { margin-top: 0; padding: 52px 24px; }
+            main { padding: 48px 20px 60px; }
+            .practice-header { align-items: flex-start; flex-direction: column; gap: 10px; }
+            .question-card { padding: 24px 18px; }
+            .actions button { flex: 1 1 100%; }
+            .result-stats { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+    <link rel="stylesheet" href="zerokb.css">
+    <link rel="stylesheet" href="zerokb-user.css">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="ccc.html">ZeroKB</a>
+        <a class="back-link" href="ccc.html">← सभी विषय</a>
+    </header>
+
+    <section class="intro">
+        <p class="eyebrow">CCC &amp; O Level practice</p>
+        <h1>Word Processing Practice</h1>
+        <p>LibreOffice Writer और word processing के exam-oriented concepts पर bilingual अभ्यास करें। प्रश्न इस वेबसाइट के लिए original wording में तैयार किए गए हैं।</p>
+    </section>
+
+    <main>
+        <div class="practice-header" id="practice-header">
+            <span class="question-number" id="question-number">Question 1/50</span>
+            <span class="score" id="attempt-count">Attempted: 0 / 50</span>
+        </div>
+        <section class="question-card" id="question-card" aria-live="polite">
+            <h2 id="question-text"></h2>
+            <div class="options" id="options"></div>
+            <div class="actions">
+                <button class="secondary" id="previous-button" type="button">Previous</button>
+                <button id="next-button" type="button">Next</button>
+                <button class="secondary" id="save-next-button" type="button">Save &amp; Next</button>
+                <button id="submit-button" type="button">Submit Quiz</button>
+                <button class="secondary" id="finish-button" type="button">Quiz समाप्त करें / End Quiz</button>
+            </div>
+        </section>
+        <section class="question-card result-card" id="result-panel" aria-live="polite" hidden></section>
+        <p class="notice">अभ्यास प्रश्न revision और परीक्षा तैयारी के लिए हैं।</p>
+    </main>
+
+    <footer>© 2026 ZeroKB · Learn • Practice • Master</footer>
+    <script src="word-processing.js"></script>
+    <script src="practice-review.js"></script>
+    <script src="zerokb-practice-features.js"></script>
+    <script>
+        const questions = window.wordProcessingQuestions;
+        let currentQuestion = 0;
+        const answers = questions.map(function () { return null; });
+
+        const questionNumber = document.getElementById("question-number");
+        const attemptCount = document.getElementById("attempt-count");
+        const questionText = document.getElementById("question-text");
+        const optionsContainer = document.getElementById("options");
+        const previousButton = document.getElementById("previous-button");
+        const nextButton = document.getElementById("next-button");
+        const saveNextButton = document.getElementById("save-next-button");
+        const submitButton = document.getElementById("submit-button");
+        const finishButton = document.getElementById("finish-button");
+        const questionCard = document.getElementById("question-card");
+        const resultPanel = document.getElementById("result-panel");
+        const practiceHeader = document.getElementById("practice-header");
+
+        function renderQuestion() {
+            const item = questions[currentQuestion];
+            questionNumber.textContent = "Question " + (currentQuestion + 1) + "/" + questions.length;
+            attemptCount.textContent = "Attempted: " + answers.filter(function (answer) { return answer !== null; }).length + " / " + questions.length;
+            questionText.replaceChildren();
+            const english = document.createElement("span");
+            english.textContent = item.question;
+            const hindi = document.createElement("span");
+            hindi.className = "question-hindi";
+            hindi.textContent = item.questionHindi;
+            questionText.append(english, hindi);
+            optionsContainer.replaceChildren();
+
+            item.options.forEach(function (option, index) {
+                const label = document.createElement("label");
+                label.className = "option";
+                const radio = document.createElement("input");
+                radio.type = "radio";
+                radio.name = "answer";
+                radio.value = index;
+                radio.checked = answers[currentQuestion] === index;
+                radio.addEventListener("change", function () {
+                    answers[currentQuestion] = index;
+                    attemptCount.textContent = "Attempted: " + answers.filter(function (answer) { return answer !== null; }).length + " / " + questions.length;
+                });
+                const copy = document.createElement("span");
+                copy.className = "option-copy";
+                const optionEnglish = document.createElement("span");
+                optionEnglish.textContent = option.en;
+                const optionHindi = document.createElement("span");
+                optionHindi.textContent = option.hi;
+                copy.append(optionEnglish, optionHindi);
+                label.append(radio, copy);
+                optionsContainer.appendChild(label);
+            });
+
+            previousButton.disabled = currentQuestion === 0;
+            nextButton.disabled = currentQuestion === questions.length - 1;
+        }
+
+        function formatAnswer(item, answer) {
+            if (answer === null) return "Unattempted / प्रयास नहीं किया";
+            return String.fromCharCode(65 + answer) + ". " + item.options[answer].en + " / " + item.options[answer].hi;
+        }
+
+        function showResult() {
+            ZeroKBPracticeFeatures.recordSubmission("word-processing", questions, answers, "correctAnswer");
+            const total = questions.length;
+            const attempted = answers.filter(function (answer) { return answer !== null; }).length;
+            const correct = answers.filter(function (answer, index) { return answer === questions[index].correctAnswer; }).length;
+            const wrong = attempted - correct;
+            const unattempted = total - attempted;
+            const accuracy = attempted ? Math.round((correct / attempted) * 100) : 0;
+
+            practiceHeader.hidden = true;
+            questionCard.hidden = true;
+            resultPanel.hidden = false;
+            resultPanel.replaceChildren();
+            const title = document.createElement("h2");
+            title.textContent = "Quiz Result / अभ्यास परिणाम";
+            const score = document.createElement("p");
+            score.className = "result-score";
+            score.textContent = "Score: " + correct + " / " + total;
+            const stats = document.createElement("div");
+            stats.className = "result-stats";
+            [["Total Questions", total], ["Attempted", attempted], ["Unattempted", unattempted], ["Correct", correct], ["Wrong", wrong], ["Score", correct + " / " + total], ["Accuracy", accuracy + "%"]].forEach(function (stat) {
+                const item = document.createElement("div");
+                const value = document.createElement("strong");
+                value.textContent = stat[1];
+                const label = document.createElement("span");
+                label.textContent = stat[0];
+                item.append(value, label);
+                stats.appendChild(item);
+            });
+
+            const reviewButton = document.createElement("button");
+            reviewButton.type = "button";
+            reviewButton.textContent = "उत्तर जाँचें / Review Answers";
+            const reviewList = document.createElement("div");
+            reviewList.hidden = true;
+            questions.forEach(function (item, index) {
+                const reviewItem = document.createElement("article");
+                reviewItem.className = "review-item";
+                const question = document.createElement("h3");
+                question.textContent = (index + 1) + ". " + item.question + " / " + item.questionHindi;
+                const selected = document.createElement("p");
+                selected.textContent = "User Selected Answer / आपका चुना उत्तर: " + formatAnswer(item, answers[index]);
+                const correctAnswer = document.createElement("p");
+                correctAnswer.textContent = "Correct Answer / सही उत्तर: " + formatAnswer(item, item.correctAnswer);
+                const explanation = document.createElement("p");
+                explanation.textContent = "Explanation / व्याख्या: " + item.explanation;
+                reviewItem.append(question, selected, correctAnswer, explanation);
+                reviewList.appendChild(reviewItem);
+            });
+            reviewButton.addEventListener("click", function () {
+                reviewList.hidden = !reviewList.hidden;
+                reviewButton.textContent = reviewList.hidden ? "उत्तर जाँचें / Review Answers" : "Review छिपाएँ / Hide Review";
+            });
+            const actions = document.createElement("div");
+            actions.className = "actions";
+            actions.appendChild(reviewButton);
+            const categoryReview = ZeroKBQuestionReview.attach(stats, questions, answers, "correctAnswer");
+            resultPanel.append(title, score, stats, categoryReview, actions, reviewList);
+        }
+
+        previousButton.addEventListener("click", function () {
+            if (currentQuestion > 0) currentQuestion--;
+            renderQuestion();
+        });
+        nextButton.addEventListener("click", function () {
+            if (currentQuestion < questions.length - 1) currentQuestion++;
+            renderQuestion();
+        });
+        saveNextButton.addEventListener("click", function () {
+            if (currentQuestion < questions.length - 1) currentQuestion++;
+            renderQuestion();
+        });
+        submitButton.addEventListener("click", showResult);
+        finishButton.addEventListener("click", function () {
+            if (window.confirm("क्या आप अभी quiz समाप्त करके partial result देखना चाहते हैं?")) showResult();
+        });
+
+        ZeroKBPracticeFeatures.attach({ subjectId: "word-processing", questions: questions, header: practiceHeader, questionCard: questionCard, getCurrentQuestion: function () { return currentQuestion; } });
+        ZeroKBQuestionReview.attachPalette(practiceHeader, questionCard, questions, answers, function () {
+            return currentQuestion;
+        }, function (index) {
+            currentQuestion = index;
+            renderQuestion();
+        });
+        renderQuestion();
+    </script>
+    <script src="zerokb-profile.js"></script>
+    <script src="zerokb-user.js"></script>
+    <script src="zerokb-shell.js"></script>
+</body>
+</html>

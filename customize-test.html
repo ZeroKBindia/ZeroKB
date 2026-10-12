@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZeroKB | Customize Test</title>
+    <style>
+        :root {
+            --ink: #0d1b35;
+            --muted: #607089;
+            --paper: #f3f6fb;
+            --white: #ffffff;
+            --teal: #2563eb;
+            --teal-dark: #1748b8;
+            --sky: #dfeeff;
+            --yellow: #f1d066;
+            --success: #21845b;
+            --error: #c2414c;
+            --line: #dce4ef;
+            --shadow: 0 18px 48px rgba(14, 34, 71, 0.12);
+            --warning: #fff2d6;
+            --warning-text: #7a5604;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        a { text-decoration: none; }
+        button, input, select { font: inherit; }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 18px 28px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--ink);
+            font-size: 1.12rem;
+            font-weight: 800;
+        }
+
+        .brand::before {
+            display: inline-grid;
+            width: 36px;
+            height: 36px;
+            place-items: center;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #2563eb, #35c4e8);
+            color: #fff;
+            content: "Z";
+            font-size: 1.15rem;
+        }
+
+        .brand::after {
+            content: "Learn • Practice • Master";
+            color: #71819a;
+            font-size: .62rem;
+            font-weight: 600;
+            letter-spacing: .02em;
+        }
+
+        .practice-feature-links {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        .practice-feature-links a {
+            color: var(--muted);
+            font-size: .86rem;
+            font-weight: 600;
+        }
+
+        .practice-feature-links a:hover { color: var(--teal); }
+
+        .custom-main {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 28px 20px 80px;
+        }
+
+        .custom-card {
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-card {
+            padding: 30px clamp(18px, 4vw, 42px);
+            background: linear-gradient(135deg, #0e2245, #183c7f);
+            color: #fff;
+        }
+
+        .eyebrow {
+            margin: 0 0 12px;
+            color: #7ee7ff;
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+        }
+
+        .hero-card h1 {
+            margin: 0;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.08;
+        }
+
+        .hero-subtitle {
+            margin: 8px 0 0;
+            color: #dfeafc;
+            font-size: 1.08rem;
+        }
+
+        .setup-card {
+            margin-top: 22px;
+            padding: 24px clamp(18px, 4vw, 32px);
+        }
+
+        .setup-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .field label,
+        .field > span,
+        .field-title {
+            color: var(--ink);
+            font-size: .92rem;
+            font-weight: 700;
+        }
+
+        .segmented,
+        .check-grid,
+        .pill-grid,
+        .count-grid,
+        .time-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .segmented label,
+        .pill-grid label,
+        .count-grid label,
+        .time-grid label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 42px;
+            padding: 9px 12px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: #f9fbff;
+            color: var(--ink);
+            cursor: pointer;
+            font-size: .9rem;
+            font-weight: 600;
+        }
+
+        .segmented input,
+        .pill-grid input,
+        .count-grid input,
+        .time-grid input,
+        .chapter-list input {
+            accent-color: var(--teal);
+        }
+
+        .chapter-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            padding: 12px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #f9fbff;
+        }
+
+        .chapter-list label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--ink);
+            font-size: .9rem;
+            padding: 8px 10px;
+            border-radius: 8px;
+            background: #fff;
+            border: 1px solid transparent;
+        }
+
+        .summary-panel {
+            margin-top: 24px;
+            padding: 18px 20px;
+            border: 1px solid #d7e7ff;
+            border-radius: 14px;
+            background: linear-gradient(180deg, #f4f9ff, #ebf5ff);
+        }
+
+        .summary-panel h2,
+        .summary-panel h3,
+        .test-view h2,
+        .result-view h2,
+        .review-view h2 {
+            margin: 0 0 12px;
+            color: var(--ink);
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .summary-item {
+            padding: 12px 14px;
+            border: 1px solid #d9ebff;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.72);
+        }
+
+        .summary-item .label {
+            display: block;
+            color: var(--muted);
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+
+        .summary-item .value {
+            margin-top: 6px;
+            display: block;
+            color: var(--ink);
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .actions-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .action-btn,
+        .secondary-btn,
+        .nav-btn,
+        .palette-btn,
+        .bookmark-btn,
+        .option-btn {
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform .14s ease, opacity .14s ease;
+        }
+
+        .action-btn,
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 0 20px;
+            border: 1px solid var(--teal);
+            background: var(--teal);
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .secondary-btn,
+        .palette-btn,
+        .bookmark-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 0 16px;
+            border: 1px solid var(--line);
+            background: #f7faff;
+            color: var(--ink);
+            font-weight: 700;
+        }
+
+        .secondary-btn:hover,
+        .nav-btn:hover,
+        .palette-btn:hover,
+        .bookmark-btn:hover,
+        .action-btn:hover,
+        .option-btn:hover { transform: translateY(-1px); }
+
+        .hidden { display: none !important; }
+
+        .error-box {
+            margin-top: 10px;
+            padding: 10px 12px;
+            border: 1px solid #ffd0d0;
+            border-radius: 10px;
+            background: #fff1f1;
+            color: var(--error);
+            font-weight: 600;
+        }
+
+        .test-view,
+        .result-view,
+        .review-view {
+            margin-top: 22px;
+            padding: 22px 20px 24px;
+        }
+
+        .test-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .timer-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border: 1px solid #d8edff;
+            border-radius: 999px;
+            background: #eef8ff;
+            color: var(--teal-dark);
+            font-weight: 800;
+            letter-spacing: .04em;
+        }
+
+        .question-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .question-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: .9rem;
+            font-weight: 700;
+            color: var(--muted);
+        }
+
+        .question-card {
+            padding: 18px 18px 6px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: linear-gradient(180deg, #fff, #f8fbff);
+        }
+
+        .question-card h3 {
+            margin: 0 0 12px;
+            font-size: clamp(1.15rem, 2vw, 1.5rem);
+            line-height: 1.5;
+        }
+
+        .question-card .question-hindi {
+            margin: 0 0 18px;
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .answer-list {
+            display: grid;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .option-button {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            width: 100%;
+            min-height: 52px;
+            padding: 12px 14px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #fff;
+            color: var(--ink);
+            text-align: left;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .option-button.selected {
+            border-color: var(--teal);
+            background: #edf5ff;
+            box-shadow: inset 0 0 0 1px rgba(37,99,235,0.2);
+        }
+
+        .option-letter {
+            display: inline-flex;
+            width: 26px;
+            height: 26px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #eef3ff;
+            color: var(--teal-dark);
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .option-button.selected .option-letter {
+            background: var(--teal);
+            color: #fff;
+        }
+
+        .question-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .question-palette-wrap {
+            position: relative;
+        }
+
+        .question-palette-panel {
+            position: absolute;
+            right: 0;
+            z-index: 20;
+            width: min(420px, calc(100vw - 32px));
+            max-height: min(72vh, 560px);
+            overflow: auto;
+            margin-top: 8px;
+            padding: 18px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: var(--shadow);
+        }
+
+        .question-palette-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .question-palette-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .question-palette-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .palette-number {
+            display: grid;
+            place-items: center;
+            min-height: 42px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #f3f7fe;
+            color: var(--ink);
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .palette-number.is-attempted { background: #eafaf2; border-color: #c9ead4; color: var(--success); }
+        .palette-number.is-skipped { background: #fff6df; border-color: #f1deb0; color: var(--warning-text); }
+        .palette-number.is-current { background: var(--teal); border-color: var(--teal); color: #fff; }
+        .palette-number.is-unattempted { background: #f4f6fb; border-color: #e0e6ef; color: var(--muted); }
+
+        .palette-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 14px;
+            color: var(--muted);
+            font-size: .82rem;
+        }
+
+        .legend-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legend-swatch {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .legend-swatch.attempted { background: var(--success); }
+        .legend-swatch.unattempted { background: #d9e1ef; }
+        .legend-swatch.skipped { background: var(--yellow); }
+        .legend-swatch.current { background: var(--teal); }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .result-card {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 18px 16px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 0 8px 18px rgba(13,31,66,0.04);
+        }
+
+        .result-card strong {
+            font-size: 1.8rem;
+            color: var(--ink);
+        }
+
+        .result-card span {
+            color: var(--muted);
+            font-size: .86rem;
+            font-weight: 700;
+        }
+
+        .result-review {
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 1px solid var(--line);
+        }
+
+        .review-list {
+            display: grid;
+            gap: 18px;
+            margin-top: 14px;
+        }
+
+        .review-item {
+            padding: 18px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #fff;
+        }
+
+        .review-item h4 {
+            margin: 0 0 10px;
+            font-size: 1.08rem;
+        }
+
+        .review-item p {
+            margin: 8px 0;
+            color: var(--ink);
+            line-height: 1.7;
+        }
+
+        .review-item .review-hindi {
+            color: var(--muted);
+        }
+
+        .review-item .review-options {
+            margin: 10px 0;
+            padding-left: 18px;
+            line-height: 1.7;
+        }
+
+        .review-item .review-option.correct {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .review-item .review-option.selected {
+            color: var(--teal-dark);
+            font-weight: 700;
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: rgba(8, 16, 32, 0.42);
+            z-index: 100;
+        }
+
+        .modal {
+            width: min(420px, calc(100vw - 32px));
+            padding: 22px 18px 18px;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            background: #fff;
+            box-shadow: var(--shadow);
+        }
+
+        .modal h3 {
+            margin: 0 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .modal p {
+            margin: 0 0 18px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 760px) {
+            .setup-grid { grid-template-columns: 1fr; }
+            .chapter-list { grid-template-columns: 1fr; }
+        }
+    </style>
+    <link rel="stylesheet" href="zerokb.css">
+    <link rel="stylesheet" href="zerokb-user.css">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="index.html">ZeroKB</a>
+        <nav class="practice-feature-links" aria-label="Practice tools">
+            <a href="index.html">Home</a>
+            <a href="ccc.html">CCC</a>
+            <a href="my-questions.html?view=saved">🔖 Saved Questions</a>
+            <a href="my-questions.html?view=mistakes">❌ My Mistakes</a>
+            <a href="customize-test.html" aria-current="page">Customize Test</a>
+        </nav>
+    </header>
+
+    <main class="custom-main">
+        <section class="custom-card hero-card">
+            <p class="eyebrow">Custom Practice</p>
+            <h1>Create your test your way</h1>
+            <p class="hero-subtitle">Build an exam style challenge using your preferred chapter mix, difficulty and time limit.</p>
+        </section>
+
+        <section id="setup-view" class="custom-card setup-card" aria-live="polite">
+            <div class="setup-grid">
+                <div class="field">
+                    <span class="field-title">Course</span>
+                    <div class="segmented" id="course-options">
+                        <label><input type="radio" name="course" value="CCC" checked> CCC</label>
+                        <label><input type="radio" name="course" value="O Level"> O Level</label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <span class="field-title">Chapter Mode</span>
+                    <div class="segmented" id="chapter-mode-options">
+                        <label><input type="radio" name="chapter-mode" value="single"> Select Chapter</label>
+                        <label><input type="radio" name="chapter-mode" value="mix" checked> Mix Chapters</label>
+                    </div>
+                </div>
+
+                <div class="field" id="single-chapter-field">
+                    <label for="chapter-select">Select chapter</label>
+                    <select id="chapter-select" aria-label="Select chapter"></select>
+                </div>
+
+                <div class="field" id="mix-chapter-field" hidden>
+                    <span class="field-title">Select chapters</span>
+                    <div id="chapter-checkboxes" class="chapter-list" aria-label="Select chapters"></div>
+                </div>
+
+                <div class="field" style="grid-column: 1 / -1;">
+                    <span class="field-title">Difficulty</span>
+                    <div class="pill-grid" id="difficulty-options">
+                        <label><input type="checkbox" value="Easy"> Easy</label>
+                        <label><input type="checkbox" value="Moderate" checked> Moderate</label>
+                        <label><input type="checkbox" value="Hard" checked> Hard</label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <span class="field-title">Number of Questions</span>
+                    <div class="count-grid" id="count-options">
+                        <label><input type="radio" name="question-count" value="10"> 10</label>
+                        <label><input type="radio" name="question-count" value="20"> 20</label>
+                        <label><input type="radio" name="question-count" value="30"> 30</label>
+                        <label><input type="radio" name="question-count" value="40"> 40</label>
+                        <label><input type="radio" name="question-count" value="50"> 50</label>
+                        <label><input type="radio" name="question-count" value="all"> <span id="all-available-count">All available</span></label>
+                        <label><input type="radio" name="question-count" value="custom"> Custom</label>
+                    </div>
+                    <div id="custom-count-wrap" class="hidden">
+                        <input id="custom-count" type="number" min="1" step="1" placeholder="Enter number of questions" style="width: 100%; min-height: 42px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line);">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <span class="field-title">Time Limit</span>
+                    <div class="time-grid" id="time-options">
+                        <label><input type="radio" name="time-limit" value="5"> 5 minutes</label>
+                        <label><input type="radio" name="time-limit" value="10"> 10 minutes</label>
+                        <label><input type="radio" name="time-limit" value="15"> 15 minutes</label>
+                        <label><input type="radio" name="time-limit" value="20" checked> 20 minutes</label>
+                        <label><input type="radio" name="time-limit" value="30"> 30 minutes</label>
+                        <label><input type="radio" name="time-limit" value="45"> 45 minutes</label>
+                        <label><input type="radio" name="time-limit" value="60"> 60 minutes</label>
+                        <label><input type="radio" name="time-limit" value="custom"> Custom</label>
+                    </div>
+                    <div id="custom-time-wrap" class="hidden">
+                        <input id="custom-time" type="number" min="1" step="1" placeholder="Enter minutes" style="width: 100%; min-height: 42px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line);">
+                    </div>
+                </div>
+            </div>
+
+            <div id="validation-message" class="error-box hidden" aria-live="assertive"></div>
+            <details class="summary-panel">
+                <summary>Question-bank diagnostics</summary>
+                <pre id="question-bank-diagnostics" aria-live="polite"></pre>
+            </details>
+
+            <div class="summary-panel" id="summary-panel">
+                <h2>Test Summary</h2>
+                <div class="summary-grid">
+                    <div class="summary-item"><span class="label">Course</span><span id="summary-course" class="value">CCC</span></div>
+                    <div class="summary-item"><span class="label">Chapter(s)</span><span id="summary-chapters" class="value">Computer Fundamentals</span></div>
+                    <div class="summary-item"><span class="label">Difficulty</span><span id="summary-difficulty" class="value">Moderate, Hard</span></div>
+                    <div class="summary-item"><span class="label">Number of Questions</span><span id="summary-count" class="value">20</span></div>
+                    <div class="summary-item"><span class="label">Time Limit</span><span id="summary-time" class="value">20 minutes</span></div>
+                </div>
+                <div class="actions-row">
+                    <button type="button" id="start-test-button" class="action-btn">Start Test</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="test-view" class="custom-card test-view hidden" aria-live="polite">
+            <div class="test-toolbar">
+                <div class="question-header">
+                    <div class="question-meta">
+                        <span id="test-course">CCC</span>
+                        <span>•</span>
+                        <span id="test-question-count">Question 1 of 20</span>
+                    </div>
+                </div>
+                <div class="timer-pill" id="timer-pill">⏱ 00:00</div>
+            </div>
+
+            <div class="question-card">
+                <h3 id="question-english"></h3>
+                <p id="question-hindi" class="question-hindi"></p>
+                <div id="answer-list" class="answer-list" aria-label="Answer options"></div>
+            </div>
+
+            <div class="question-actions">
+                <button type="button" id="previous-button" class="secondary-btn">Previous</button>
+                <button type="button" id="bookmark-button" class="bookmark-btn">🔖 Bookmark</button>
+                <button type="button" id="save-next-button" class="secondary-btn">Save &amp; Next</button>
+                <button type="button" id="next-button" class="secondary-btn">Next / Skip</button>
+                <div class="question-palette-wrap">
+                    <button type="button" id="palette-toggle" class="palette-btn">Question Palette</button>
+                    <div id="palette-panel" class="question-palette-panel hidden" aria-label="Question palette"></div>
+                </div>
+                <button type="button" id="submit-button" class="action-btn">Submit Test</button>
+            </div>
+        </section>
+
+        <section id="result-view" class="custom-card result-view hidden" aria-live="polite">
+            <h2>Test Results</h2>
+            <div id="result-summary" class="result-stats"></div>
+            <div id="result-review" class="result-review"></div>
+            <div class="actions-row">
+                <button type="button" id="review-answers-button" class="action-btn">Review Answers</button>
+                <button type="button" id="new-test-button" class="secondary-btn">Create New Test</button>
+            </div>
+        </section>
+
+        <section id="review-view" class="custom-card review-view hidden" aria-live="polite">
+            <h2>Review Answers</h2>
+            <div id="review-list" class="review-list"></div>
+            <div class="actions-row">
+                <button type="button" id="back-to-results-button" class="secondary-btn">Back to Results</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="customize-test.js"></script>
+    <script src="zerokb-profile.js"></script>
+    <script src="zerokb-user.js"></script>
+    <script src="zerokb-shell.js"></script>
+</body>
+</html>

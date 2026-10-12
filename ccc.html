@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CCC परीक्षा की तैयारी के लिए विषय और अभ्यास।">
+    <title>ZeroKB | CCC Preparation</title>
+    <style>
+        :root {
+            --ink: #172a3a;
+            --muted: #5c6d79;
+            --paper: #f5f1e8;
+            --white: #fffdf8;
+            --teal: #087f8c;
+            --teal-dark: #075e68;
+            --yellow: #f2c14e;
+            --coral: #e87861;
+            --line: #d9d6cc;
+            --shadow: 0 18px 45px rgba(23, 42, 58, 0.12);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: Georgia, "Noto Serif Devanagari", serif;
+            line-height: 1.6;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1180px;
+            margin: auto;
+            padding: 22px 28px;
+        }
+
+        .brand {
+            color: var(--ink);
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: .04em;
+            text-decoration: none;
+        }
+
+        .brand span { color: var(--teal); }
+        .back-link {
+            color: var(--muted);
+            font-family: Arial, sans-serif;
+            font-size: .9rem;
+            text-decoration: none;
+        }
+        .back-link:hover { color: var(--teal); }
+
+        .intro {
+            max-width: 1180px;
+            margin: 18px auto 0;
+            padding: 62px 8%;
+            background: var(--teal);
+            color: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .eyebrow {
+            margin: 0 0 12px;
+            color: var(--yellow);
+            font-family: Arial, sans-serif;
+            font-size: .76rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            max-width: 700px;
+            margin: 0;
+            font-size: clamp(2.5rem, 6vw, 4.8rem);
+            line-height: 1.05;
+            letter-spacing: -.035em;
+        }
+
+        .intro p {
+            max-width: 580px;
+            margin: 22px 0 0;
+            color: #d7f0ed;
+            font-size: 1.12rem;
+        }
+
+        main { max-width: 1180px; margin: auto; padding: 68px 28px; }
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 24px;
+            margin-bottom: 28px;
+        }
+        h2 { margin: 0; font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.1; }
+        .section-heading p { max-width: 370px; margin: 0; color: var(--muted); }
+
+        .topics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .topic-card {
+            display: flex;
+            min-height: 238px;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 24px;
+            border: 1px solid var(--line);
+            border-top: 5px solid var(--yellow);
+            background: var(--white);
+            box-shadow: 0 10px 25px rgba(23, 42, 58, 0.06);
+        }
+        .topic-card:nth-child(even) { border-top-color: var(--coral); }
+        .topic-number {
+            color: var(--teal);
+            font-family: Arial, sans-serif;
+            font-size: .76rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+        }
+        .topic-card h3 { margin: 15px 0 22px; font-size: 1.3rem; line-height: 1.25; }
+        .practice-button {
+            margin-top: auto;
+            padding: 10px 15px;
+            border: 1px solid var(--teal);
+            background: transparent;
+            color: var(--teal-dark);
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: .83rem;
+            font-weight: 700;
+        }
+        .practice-button:hover { background: var(--teal); color: var(--white); }
+
+        .study-material {
+            margin-top: 74px;
+            padding-top: 42px;
+            border-top: 1px solid var(--line);
+        }
+        .study-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+        .study-card {
+            display: flex;
+            min-height: 300px;
+            flex-direction: column;
+            padding: 24px;
+            border: 1px solid var(--line);
+            border-top: 5px solid var(--yellow);
+            border-radius: 8px;
+            background: var(--white);
+            box-shadow: 0 10px 25px rgba(23, 42, 58, 0.06);
+        }
+        .study-card:nth-child(even) { border-top-color: var(--coral); }
+        .study-number {
+            color: var(--teal);
+            font-family: Arial, sans-serif;
+            font-size: .76rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+        }
+        .study-card h3 { margin: 12px 0 8px; font-size: 1.25rem; line-height: 1.25; }
+        .study-card p { margin: 0 0 14px; color: var(--muted); font-size: .92rem; }
+        .pdf-label {
+            margin-top: auto;
+            color: var(--teal-dark);
+            font-family: Arial, sans-serif;
+            font-size: .82rem;
+            font-weight: 700;
+        }
+        .coming-soon {
+            align-self: flex-start;
+            margin-top: 9px;
+            padding: 3px 9px;
+            border: 1px solid #ead89f;
+            border-radius: 999px;
+            background: #fff7dc;
+            color: #755b11;
+            font-family: Arial, sans-serif;
+            font-size: .7rem;
+            font-weight: 700;
+        }
+        .study-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 15px; }
+        .study-button {
+            min-width: 0;
+            padding: 9px 6px;
+            border: 1px solid var(--teal);
+            border-radius: 4px;
+            background: var(--teal);
+            color: var(--white);
+            font-family: Arial, sans-serif;
+            font-size: .76rem;
+            font-weight: 700;
+        }
+        .study-button.secondary { background: transparent; color: var(--teal-dark); }
+        .study-button:disabled { cursor: not-allowed; opacity: .48; }
+
+        footer {
+            padding: 24px 28px;
+            background: var(--ink);
+            color: #c3d0d1;
+            font-family: Arial, sans-serif;
+            font-size: .85rem;
+            text-align: center;
+        }
+
+        @media (max-width: 900px) {
+            .topics, .study-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .topbar { padding: 18px 20px; }
+            .back-link { font-size: .78rem; }
+            .intro { margin-top: 0; padding: 56px 24px; }
+            main { padding: 52px 20px; }
+            .section-heading { display: block; }
+            .section-heading p { margin-top: 12px; }
+            .topics, .study-grid { grid-template-columns: 1fr; }
+            .topic-card { min-height: 205px; }
+            .study-material { margin-top: 56px; padding-top: 34px; }
+            .study-card { min-height: 270px; }
+        }
+    </style>
+    <link rel="stylesheet" href="zerokb.css">
+    <link rel="stylesheet" href="zerokb-user.css">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="index.html">ZeroKB</a>
+        <nav class="practice-feature-links" aria-label="Practice tools">
+            <a href="my-questions.html?view=saved">🔖 My Saved Questions</a>
+            <a href="my-questions.html?view=mistakes">❌ My Mistakes</a>
+        </nav>
+        <a class="back-link" href="index.html#course-choice">← वापस कोर्स पर</a>
+    </header>
+
+    <section class="intro">
+        <p class="eyebrow">CCC foundation course</p>
+        <h1>CCC परीक्षा तैयारी</h1>
+        <p>कंप्यूटर, इंटरनेट, डिजिटल भुगतान और ऑनलाइन सुरक्षा से जुड़े CCC विषयों का अभ्यास करें।</p>
+    </section>
+
+    <main>
+        <div class="section-heading">
+            <h2>परीक्षा के मुख्य विषय</h2>
+            <p>एक-एक topic पूरा करते हुए अपनी तैयारी को मजबूत बनाइए।</p>
+        </div>
+
+        <section class="topics" aria-label="CCC परीक्षा के विषय">
+            <article class="topic-card">
+                <span class="topic-number">01</span>
+                <h3>Computer Fundamentals</h3>
+                <a class="practice-button" href="practice-computer.html">Practice करें</a>
+            </article>
+            <article class="topic-card">
+                <span class="topic-number">02</span>
+                <h3>Operating System</h3>
+                <a class="practice-button" href="practice-operating-system.html">Practice करें</a>
+            </article>
+            <article class="topic-card">
+                <span class="topic-number">03</span>
+                <h3>Word Processing</h3>
+                <a class="practice-button" href="practice-word-processing.html">Practice करें</a>
+            </article>
+            <article class="topic-card">
+                <span class="topic-number">04</span>
+                <h3>Spreadsheet</h3>
+                <a class="practice-button" href="practice-spreadsheet.html">Practice करें</a>
+            </article>
+            <article class="topic-card">
+                <span class="topic-number">05</span>
+                <h3>Internet &amp; E-mail</h3>
+                <a class="practice-button" href="practice-internet-email.html">Practice करें</a>
+            </article>
+            <article class="topic-card">
+                <span class="topic-number">06</span>
+                <h3>Digital Financial Services</h3>
+                <a class="practice-button" href="practice-digital-financial-services.html">Practice करें</a>
+            </article>
+            <article class="topic-card">
+                <span class="topic-number">07</span>
+                <h3>Cyber Security</h3>
+                <a class="practice-button" href="practice-cyber-security.html">Practice करें</a>
+            </article>
+            <article class="topic-card">
+                <span class="topic-number">08</span>
+                <h3>Future Skills</h3>
+                <a class="practice-button" href="practice-future-skills.html">Practice करें</a>
+            </article>
+        </section>
+
+        <section class="study-material" id="study-material" aria-labelledby="study-material-title">
+            <div class="section-heading">
+                <h2 id="study-material-title">📚 Study Material / PDF Notes</h2>
+                <p>हर CCC chapter के notes जल्द उपलब्ध होंगे।</p>
+            </div>
+            <div class="study-grid">
+                <article class="study-card" data-pdf-path="pdf/01_computer_fundamentals.pdf">
+                    <span class="study-number">01</span>
+                    <h3>Computer Fundamentals</h3>
+                    <p>कंप्यूटर के भाग, memory और बुनियादी अवधारणाओं के notes।</p>
+                    <span class="pdf-label">📄 PDF Notes</span>
+                    <span class="coming-soon">Coming Soon</span>
+                    <div class="study-actions">
+                        <button class="study-button" type="button" disabled>Read PDF</button>
+                        <button class="study-button secondary" type="button" disabled>Download PDF</button>
+                    </div>
+                </article>
+                <article class="study-card" data-pdf-path="pdf/02_operating_system.pdf">
+                    <span class="study-number">02</span>
+                    <h3>Operating System</h3>
+                    <p>Operating System, files और रोज़मर्रा के system tools की जानकारी।</p>
+                    <span class="pdf-label">📄 PDF Notes</span>
+                    <span class="coming-soon">Coming Soon</span>
+                    <div class="study-actions">
+                        <button class="study-button" type="button" disabled>Read PDF</button>
+                        <button class="study-button secondary" type="button" disabled>Download PDF</button>
+                    </div>
+                </article>
+                <article class="study-card" data-pdf-path="pdf/03_word_processing.pdf">
+                    <span class="study-number">03</span>
+                    <h3>Word Processing</h3>
+                    <p>दस्तावेज़ बनाना, format करना और text के साथ काम करना सीखें।</p>
+                    <span class="pdf-label">📄 PDF Notes</span>
+                    <span class="coming-soon">Coming Soon</span>
+                    <div class="study-actions">
+                        <button class="study-button" type="button" disabled>Read PDF</button>
+                        <button class="study-button secondary" type="button" disabled>Download PDF</button>
+                    </div>
+                </article>
+                <article class="study-card" data-pdf-path="pdf/04_spreadsheet.pdf">
+                    <span class="study-number">04</span>
+                    <h3>Spreadsheet</h3>
+                    <p>Cells, formulas, functions और data को व्यवस्थित करने के notes।</p>
+                    <span class="pdf-label">📄 PDF Notes</span>
+                    <span class="coming-soon">Coming Soon</span>
+                    <div class="study-actions">
+                        <button class="study-button" type="button" disabled>Read PDF</button>
+                        <button class="study-button secondary" type="button" disabled>Download PDF</button>
+                    </div>
+                </article>
+                <article class="study-card" data-pdf-path="pdf/05_internet_email.pdf">
+                    <span class="study-number">05</span>
+                    <h3>Internet &amp; E-mail</h3>
+                    <p>Internet सेवाओं, web और e-mail के जरूरी concepts समझें।</p>
+                    <span class="pdf-label">📄 PDF Notes</span>
+                    <span class="coming-soon">Coming Soon</span>
+                    <div class="study-actions">
+                        <button class="study-button" type="button" disabled>Read PDF</button>
+                        <button class="study-button secondary" type="button" disabled>Download PDF</button>
+                    </div>
+                </article>
+                <article class="study-card" data-pdf-path="pdf/06_digital_financial_services.pdf">
+                    <span class="study-number">06</span>
+                    <h3>Digital &amp; Financial Services</h3>
+                    <p>Digital payments, banking और नागरिक सेवाओं की जानकारी।</p>
+                    <span class="pdf-label">📄 PDF Notes</span>
+                    <span class="coming-soon">Coming Soon</span>
+                    <div class="study-actions">
+                        <button class="study-button" type="button" disabled>Read PDF</button>
+                        <button class="study-button secondary" type="button" disabled>Download PDF</button>
+                    </div>
+                </article>
+                <article class="study-card" data-pdf-path="pdf/07_cyber_security.pdf">
+                    <span class="study-number">07</span>
+                    <h3>Cyber Security</h3>
+                    <p>Online सुरक्षा, सुरक्षित passwords और digital सावधानियाँ।</p>
+                    <span class="pdf-label">📄 PDF Notes</span>
+                    <span class="coming-soon">Coming Soon</span>
+                    <div class="study-actions">
+                        <button class="study-button" type="button" disabled>Read PDF</button>
+                        <button class="study-button secondary" type="button" disabled>Download PDF</button>
+                    </div>
+                </article>
+                <article class="study-card" data-pdf-path="pdf/08_future_skills.pdf">
+                    <span class="study-number">08</span>
+                    <h3>Future Skills</h3>
+                    <p>नई तकनीकों और आगे के digital कौशलों का परिचय।</p>
+                    <span class="pdf-label">📄 PDF Notes</span>
+                    <span class="coming-soon">Coming Soon</span>
+                    <div class="study-actions">
+                        <button class="study-button" type="button" disabled>Read PDF</button>
+                        <button class="study-button secondary" type="button" disabled>Download PDF</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>© 2026 ZeroKB · Learn • Practice • Master</footer>
+    <script src="zerokb-profile.js"></script>
+    <script src="zerokb-user.js"></script>
+    <script src="zerokb-shell.js"></script>
+</body>
+</html>
